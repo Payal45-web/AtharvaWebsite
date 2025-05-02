@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "category": "Vacuum Cleaner",
+    "name": "VP100",
+    "price": "397.00",
+    "comparePrice": "450.00",
+    "description": "A compact, portable vacuum canister designed for light-duty commercial use (e.g. offices, hotel rooms, retail outlets). It features a durable chassis with a high-level HEPA exhaust filter to maintain air quality during cleaning.",
+    "specification": "Common specs include ~800–900 W power, ~2.5–5 L tank, 50–70 dB noise, and ~5–6 kg weight.",
+    "image": "/assets/1.jpg"
+  },
+  {
+    "id": 2,
+    "category": "Vacuum Cleaner",
+    "name": "VP300 Series",
+    "price": "397.00",
+    "comparePrice": "450.00",
+    "description": "The Nilfisk VP300 series is an ergonomically designed canister vacuum for light-to-medium duty cleaning in offices, hotel rooms, retail stores, and similar areas. It offers best-in-class dustbag capacity, a built-in H13 HEPA exhaust filter, and a low noise level (~62 dB(A)) suitable for daytime use.",
+    "specification": "Typical specs include an 800 W motor, 2.6 gallon (10 L) tank, noise ~56 dB, and weight ~11 lb (5 kg). Dimensions are about 15.7\" × 13.4\" × 15.6\".",
+    "image": "/assets/2.jpg"
+  },
+  {
+    "id": 3,
+    "category": "Vacuum Cleaner",
+    "name": "VP930 / GD930",
+    "price": "801.00",
+    "comparePrice": "899.00",
+    "description": "A durable wet/dry canister vacuum known for cardetail use and medium-duty industrial cleaning. It features high suction, a large tank, and on-board HEPA filtration. Often marketed for vehicle maintenance and workshop use.",
+    "specification": "Typical GD930 specs: ~1200 W power, ~18\"H × 18\"W × 22\"L footprint, ~38 lb weight, ~14 gallon (55 L) tank, multi-stage paper-bag and HEPA filtration (99.9% efficiency) for class L dust, stainless steel canister.",
+    "image": "/assets/3.jpg"
+  },
+  {
+    "id": 4,
+    "category": "Vacuum Cleaner",
+    "name": "VU500",
+    "price": "400.00",
+    "comparePrice": "450.00",
+    "description": "A 5-gallon (19 L) upright or canister vacuum often used in commercial cleaning. It is a mid-sized unit for medium-duty cleaning, offering HEPA filtration and sturdy build.",
+    "specification": "Approximately 5–7 kg weight, 5-gal capacity, ~800–1200 W motor, noise ~60–65 dB, wheels for mobility. HEPA exhaust and bagged dust collection are typical.",
+    "image": "/assets/4.jpg"
+  },
+  {
+    "id": 5,
+    "category": "Vacuum Cleaner",
+    "name": "GD 5 Battery",
+    "price": "500.00",
+    "comparePrice": "550.00",
+    "description": "A battery-powered cordless vacuum suitable for quick, portable clean-up. Its small size and cordless operation make it ideal for food service or retail spaces. It features a removable battery pack and HEPA-level filtration.",
+    "specification": "Battery voltage (e.g. 14.4–18 V Li-ion), tank ~5 L, weight ~4–5 kg (including battery), noise ~60 dB. Runtime ~30–40 min per charge, with charging station.",
+    "image": "/assets/5.jpg"
+  },
+  {
+    "id": 6,
+    "category": "Vacuum Cleaner",
+    "name": "ATTIX 44-2L IC",
+    "price": "1000.00",
+    "comparePrice": "1200.00",
+    "description": "A high-capacity dry vacuum/dust extractor designed for construction and industrial jobs. The Attix 44 has a 42-L steel container, sealed dust system, and automatic filter cleaning (InfiniClean™) to maintain strong suction.",
+    "specification": "Power: 2×1200 W motors (2400 W total), Voltage: 220–240 V single-phase. Capacity: 42 L steel tank. Filtration: Standard PTFE dust filter (optionally HEPA). Airflow: ~72 L/s, Vacuum: ~220 mbar. Dimensions: ~60×50×104 cm (H×W×L), Weight: ~37 kg (with filters).",
+    "image": "/assets/6.jpg"
+  },
+  {
+    "id": 7,
+    "category": "Vacuum Cleaner",
+    "name": "T40W",
+    "price": "800.00",
+    "comparePrice": "900.00",
+    "description": "The Nilfisk Attix 40T (wet/dry) vacuum is a twin-motor (2400 W total), 37-L vacuum for mixed wet/dry pickup. The 'W' denotes water-handling capability with a stainless steel tank.",
+    "specification": "Motors: 2×1200 W (2400 W). Tank: 37 L stainless steel. Airflow: 3700 L/min. Vacuum: ~250 mbar. Noise: ~59 dB(A). Weight: ~13 kg (dry).",
+    "image": "/assets/7.jpg"
+  },
+  {
+    "id": 8,
+    "category": "Vacuum Cleaner",
+    "name": "VHB436",
+    "price": "1500.00",
+    "comparePrice": "1700.00",
+    "description": "A heavy-duty multi-motor vacuum system (possibly 3 × 1200 W = 3600 W) designed for bulk removal of heavy dust/debris (like concrete, tiles). Likely features large debris inlet and robust filtration. Used in industrial sites for large volumes of dust/debris.",
+    "specification": "Presumed Power: 3×1200 W (3600 W), Tank: ~55–75 L, Flow: ~100–110 L/s, Vacuum: ~240 mbar, Weight: ~50–60 kg.",
+    "image": "/assets/8.jpg"
+  },
+  {
+    "id": 9,
+    "category": "Scrubber Dryers",
+    "name": "SC100",
+    "price": "2000.00",
+    "comparePrice": "2200.00",
+    "description": "The SC100 is a battery-powered upright walk-behind scrubber for small spaces and narrow aisles (shops, gas stations, restaurants, hotels, etc.). It replaces manual mop cleaning with scrubbing and drying in one pass.",
+    "specification": "Cleaning path: ~12\" (30 cm) brush width. Brush speed: ~620 rpm. Solution/Recovery: ~3.0 gal (11.4 L) each. Run time: ~40 min (lead-acid battery). Speed: ~0–3 km/h. Noise: ~70 dB(A). Weight: ~34 kg. Dimensions: ~120×40×84 cm (H×W×L).",
+    "image": "/assets/9.jpg"
+  },
+  {
+    "id": 10,
+    "category": "Scrubber Dryers",
+    "name": "SC250",
+    "price": "3400.00",
+    "comparePrice": "3800.00",
+    "description": "A compact ride-on or walk-behind battery-powered micro-scrubber for hard floors. The SC250 features a 13.4\" (34 cm) cylindrical brush (or microfiber roller) that sweeps and scrubs simultaneously, with suction to dry the floor in one pass.",
+    "specification": "Cleaning path: 34 cm. Solution/Recovery: 6.0 L each (1.6 gal). Brush: cylindrical 13.4\" diameter. Battery: 36 V Li-ion (7.8 Ah) with on-board charger. Vacuum: built-in. Weight: ~25.2 kg (55.5 lb). Dimensions: 64×43×48 cm (25\"×17\"×19\"). Noise: ~64 dB(A).",
+    "image": "/assets/10.jpg"
+  },
+  {
+    "id": 11,
+    "category": "Scrubber Dryers",
+    "name": "SC8000",
+    "price": "25000.00",
+    "comparePrice": "28000.00",
+    "description": "A large-capacity industrial ride-on scrubber (with Kubota engine or electric motor) for very heavy-duty cleaning. The SC8000 can clean up to 100,000 ft² on a single tank fill, making it extremely productive for large warehouses, factories, or airports.",
+    "specification": "Cleaning width: 48–62\" (122–157 cm). Tanks: 100 gal (378 L) solution + 100 gal recovery. Brushes: Dual cylindrical or disk (60\" or 62\"). Engine: Kubota 24 HP LPG (or 36V battery). Productivity: Up to 100,000 ft²/3.7 hr at 20,500 ft²/hr (base model). Dimensions: ~210×130×155 cm. Weight: ~1150 kg.",
+    "image": "/assets/11.jpg"
+  },
+  {
+    "id": 12,
+    "category": "Sweepers",
+    "name": "SW750",
+    "price": "3000.00",
+    "comparePrice": "3500.00",
+    "description": "A battery-powered walk-behind sweeper for indoor/outdoor use. The SW750 is highly versatile (even carpet-capable) and operates very quietly, allowing cleaning during business hours.",
+    "specification": "Working width: ~75 cm (with side brush). Batteries: 12 V, 49 Ah (X 1), charger included. Brushes: 1 main + 1 side (adjustable). Filter: Polyester panel with shaker. Run time: ~2–3.5 hrs (depending on battery option). Dimensions: ~100×70×115 cm (L×W×H). Weight: ~85 kg (with battery).",
+    "image": "/assets/12.jpg"
+  },
+  {
+    "id": 13,
+    "category": "Sweepers",
+    "name": "SW8000",
+    "price": "12500.00",
+    "comparePrice": "14000.00",
+    "description": "A heavy-duty ride-on or walk-behind sweeper for large areas (e.g. warehouses, factories). The Nilfisk SW8000 (or equivalent Clarke V) typically features a wide brush path (~34\"–40\"), large hopper (~55–60 L) and high runtime.",
+    "specification": "Working width: ~85–100 cm (dual side brush). Hopper: 55+ L. Batteries: 24 V (*2), run ~4–6 hrs. Productivity: ~10,000 m²/hr. Weight: ~300–400 kg.",
+    "image": "/assets/13.jpg"
+  },
+  {
+    "id": 14,
+    "category": "High-Pressure Washers",
+    "name": "MC 2C Series",
+    "price": "1500.00",
+    "comparePrice": "1800.00",
+    "description": "The MC-2C is a cold-water pressure washer in Nilfisk's range, likely the MC 2C Series. It's a compact, gas- or electric-powered machine (~220–380 bar) for medium-duty cleaning (equipment, vehicles, pavements).",
+    "specification": "Pressure: ~220–300 bar (3,200–4,350 PSI). Flow: ~12–15 L/min. Motor: Electric 3–5 kW or Honda GX engine. Dimensions: 90×60×100 cm, Weight: ~100–130 kg. Features: Built-in detergent tank, removable wand, thermal relief.",
+    "image": "/assets/14.jpg"
+  },
+  {
+    "id": 15,
+    "category": "High-Pressure Washers",
+    "name": "MH 5M Series",
+    "price": "4000.00",
+    "comparePrice": "4500.00",
+    "description": "The MH 5M is typically a hot-water pressure washer series (Nilfisk MH series). MH-5M likely means ~1500 PSI (5 MPa) gas/diesel heated washer. These machines heat water up to ~80–150°C for grease removal. Popular for workshops and heavy-duty cleaning.",
+    "specification": "Pressure: ~150–180 bar (2175–2610 PSI), Flow: ~10–12 L/min. Water Temp: up to 150°C. Engine: Honda 13–25 HP or electric motor + diesel burner. Fuel: Diesel/gasoline for burner. Dimensions: ~120×65×100 cm, Weight: ~200–300 kg.",
+    "image": "/assets/15.jpg"
+  },
+  {
+    "id": 16,
+    "category": "Robotic Floorcare",
+    "name": "Nilfisk Liberty SC50",
+    "price": "75000.00",
+    "comparePrice": "80000.00",
+    "description": "An autonomous robotic floor scrubber for medium-to-large facilities. The Liberty SC50 scrubs floors while staff do other tasks. It operates up to 6 hours on a single charge, covering ~50,000–55,000 ft² (≈5,000 m²) per cycle.",
+    "specification": "Brush width: 51 cm (20\" REV scrub head). Tanks: 57 L solution, 53 L recovery (15/14 gal). Drive: 24 V, 255 Ah battery. Speed: ~3–5 km/h. Navigation: Laser/vision systems for mapping. Weight: ~200 kg. Controls: Integrated tablet interface with wireless connectivity.",
+    "image": "/assets/16.jpg"
+  },
+  {
+    "id": 17,
+    "category": "Material Handling Systems",
+    "name": "Overhead Rails",
+    "price": "4000.00",
+    "comparePrice": "4500.00",
+    "description": "Overhead rail (monorail or I-beam) systems provide suspended track for lifting/positioning devices. They enable tools or fixtures to traverse the workspace on a secure track, reducing floor clutter and improving ergonomics.",
+    "specification": "Capacities depend on mount. Data for articulating arms on rails shows up to ~907 kg (2000 lb) capacity at 1.8 m (6') extension, tapering to ~294 kg (650 lb) at 6.1 m (20'). Rail span can reach 10–12 m (30–40') with carriages. Rails are often made of aluminum (lightweight, corrosion-resistant) or steel.",
+    "image": "/assets/17.jpg"
+  },
+  {
+    "id": 18,
+    "category": "Material Handling Systems",
+    "name": "Air Balancers",
+    "price": "5000.00",
+    "comparePrice": "5500.00",
+    "description": "Pneumatic (air) balancers suspend and balance loads to near-weightlessness, letting operators easily lift and position heavy tools or parts.",
+    "specification": "Models like ZAW050080S2 support 500 lb (227 kg) at 2.0 m travel. Smaller units (e.g. ZAW015080) handle 150 lb (68 kg). All use clean compressed air (min. 4–6 bar) to float the load. Common travel lengths are 60\" - 120\" (1.5–3 m). Optional high-capacity 'multi-booster' units (EA series) can balance multiple load states.",
+    "image": "/assets/18.jpg"
+  },
+  {
+    "id": 19,
+    "category": "Assembly Tools",
+    "name": "QX Series Cordless Torque Multiplier",
+    "price": "4000.00",
+    "comparePrice": "4500.00",
+    "description": "The Ingersoll Rand QX Series™ is a cordless hydraulic torque multiplier system. The 40V QX tools provide high torque with precise control (torque range 5–135 ft-lbs for models shown).",
+    "specification": "Example model (QXBD5PT500PM12) delivers 5–500 ft-lb (7–678 Nm) torque. Speed ~83 RPM (with 2\" tool). Weight ~6.3 kg. Uses 40V lithium battery. Reaction arm length ~15\". Onboard data and wireless (Bluetooth) options available.",
+    "image": "/assets/19.jpg"
+  },
+  {
+    "id": 20,
+    "category": "Assembly Tools",
+    "name": "URYU UAAMC Series (Angle-Tracking Air Torque Tools)",
+    "price": "1500.00",
+    "comparePrice": "1800.00",
+    "description": "Uryu's UAAMC series are pneumatic assembly wrenches with built-in angle and torque control. The 'Super INTELEC' system provides dual monitoring: it controls final torque and also monitors angle of rotation.",
+    "specification": "Models cover torque ranges from ~5–60 Nm (4–45 ft·lb) for bolts 6–10 mm diameter. For example, UA400AMC handles 5–11 Nm; UA800AMC handles 40–60 Nm. Free speed ~3300–6000 RPM. Tool weight ~1.35–1.70 kg. Air consumption ~8–15 CFM at 72 psi. Drive size 9.5 mm (3/8\") square.",
+    "image": "/assets/20.jpg"
+  }
+]
