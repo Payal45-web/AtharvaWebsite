@@ -7,7 +7,7 @@ const Testimonials = () => {
       name: "Emma watson",
       role: "Co-Founder",
       image: "https://cdn.prod.website-files.com/65b9cce908217ff5cd624b00/65bc862cd6b9ad76b0c043cc_testimonial-image-02.png",
-      testimonial: "Our partnership with Gearo has been a key factor in our growth. Their commitment to excellence aligns perfectly with our values, and it reflects in the success."
+      testimonial: "Our partnership with Atharva Enterpriseso has been a key factor in our growth. Their commitment to excellence aligns perfectly with our values, and it reflects in the success."
     },
     {
       id: 2,
@@ -51,7 +51,7 @@ const Testimonials = () => {
       {/* Added max-w-5xl to limit width and add space on sides */}
       <div className="container max-w-5xl mx-auto px-8">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold">What Our Customers Say</h2>
+          <h2 className="text-3xl font-medium">What Our Customers Say</h2>
         </div>
         
         {/* Adjusted grid layout with more space between cards */}
@@ -70,7 +70,7 @@ const Testimonials = () => {
                 />
                 <div className="ml-3">
                   {/* Reduced font size */}
-                  <h3 className="font-bold text-base">{testimonial.name}</h3>
+                  <h3 className="font-medium text-base">{testimonial.name}</h3>
                   <p className="text-gray-600 text-sm">{testimonial.role}</p>
                 </div>
               </div>

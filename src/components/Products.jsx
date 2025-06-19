@@ -1,7 +1,8 @@
-import React, { useMemo, useState, useEffect } from 'react';
-import productsData from './Products.json';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import productsData from '../components/Products.json';
 
-// Import all images with their correct file extensions
+// Import all 270 images with correct extensions
 import img1 from '../assets/1.jpg';
 import img2 from '../assets/2.jpg';
 import img3 from '../assets/3.jpg';
@@ -27,7 +28,7 @@ import img22 from '../assets/22.webp';
 import img23 from '../assets/23.webp';
 import img24 from '../assets/24.jpg';
 import img25 from '../assets/25.webp';
-import img26 from '../assets/26.jpg'; // Using jpg version (there's also 26.avif)
+import img26 from '../assets/26.avif';
 import img27 from '../assets/27.png';
 import img28 from '../assets/28.webp';
 import img29 from '../assets/29.jpg';
@@ -273,286 +274,43 @@ import img268 from '../assets/268.jpeg';
 import img269 from '../assets/269.jpg';
 import img270 from '../assets/270.jpeg';
 
-// Create a complete image mapping object for all 270 products
-const imageMapping = {
-  1: img1,
-  2: img2,
-  3: img3,
-  4: img4,
-  5: img5,
-  6: img6,
-  7: img7,
-  8: img8,
-  9: img9,
-  10: img10,
-  11: img11,
-  12: img12,
-  13: img13,
-  14: img14,
-  15: img15,
-  16: img16,
-  17: img17,
-  18: img18,
-  19: img19,
-  20: img20,
-  21: img21,
-  22: img22,
-  23: img23,
-  24: img24,
-  25: img25,
-  26: img26,
-  27: img27,
-  28: img28,
-  29: img29,
-  30: img30,
-  31: img31,
-  32: img32,
-  33: img33,
-  34: img34,
-  35: img35,
-  36: img36,
-  37: img37,
-  38: img38,
-  39: img39,
-  40: img40,
-  41: img41,
-  42: img42,
-  43: img43,
-  44: img44,
-  45: img45,
-  46: img46,
-  47: img47,
-  48: img48,
-  49: img49,
-  50: img50,
-  51: img51,
-  52: img52,
-  53: img53,
-  54: img54,
-  55: img55,
-  56: img56,
-  57: img57,
-  58: img58,
-  59: img59,
-  60: img60,
-  61: img61,
-  62: img62,
-  63: img63,
-  64: img64,
-  65: img65,
-  66: img66,
-  67: img67,
-  68: img68,
-  69: img69,
-  70: img70,
-  71: img71,
-  72: img72,
-  73: img73,
-  74: img74,
-  75: img75,
-  76: img76,
-  77: img77,
-  78: img78,
-  79: img79,
-  80: img80,
-  81: img81,
-  82: img82,
-  83: img83,
-  84: img84,
-  85: img85,
-  86: img86,
-  87: img87,
-  88: img88,
-  89: img89,
-  90: img90,
-  91: img91,
-  92: img92,
-  93: img93,
-  94: img94,
-  95: img95,
-  96: img96,
-  97: img97,
-  98: img98,
-  99: img99,
-  100: img100,
-  101: img101,
-  102: img102,
-  103: img103,
-  104: img104,
-  105: img105,
-  106: img106,
-  107: img107,
-  108: img108,
-  109: img109,
-  110: img110,
-  111: img111,
-  112: img112,
-  113: img113,
-  114: img114,
-  115: img115,
-  116: img116,
-  117: img117,
-  118: img118,
-  119: img119,
-  120: img120,
-  121: img121,
-  122: img122,
-  123: img123,
-  124: img124,
-  125: img125,
-  126: img126,
-  127: img127,
-  128: img128,
-  129: img129,
-  130: img130,
-  131: img131,
-  132: img132,
-  133: img133,
-  134: img134,
-  135: img135,
-  136: img136,
-  137: img137,
-  138: img138,
-  139: img139,
-  140: img140,
-  141: img141,
-  142: img142,
-  143: img143,
-  144: img144,
-  145: img145,
-  146: img146,
-  147: img147,
-  148: img148,
-  149: img149,
-  150: img150,
-  151: img151,
-  152: img152,
-  153: img153,
-  154: img154,
-  155: img155,
-  156: img156,
-  157: img157,
-  158: img158,
-  159: img159,
-  160: img160,
-  161: img161,
-  162: img162,
-  163: img163,
-  164: img164,
-  165: img165,
-  166: img166,
-  167: img167,
-  168: img168,
-  169: img169,
-  170: img170,
-  171: img171,
-  172: img172,
-  173: img173,
-  174: img174,
-  175: img175,
-  176: img176,
-  177: img177,
-  178: img178,
-  179: img179,
-  180: img180,
-  181: img181,
-  182: img182,
-  183: img183,
-  184: img184,
-  185: img185,
-  186: img186,
-  187: img187,
-  188: img188,
-  189: img189,
-  190: img190,
-  191: img191,
-  192: img192,
-  193: img193,
-  194: img194,
-  195: img195,
-  196: img196,
-  197: img197,
-  198: img198,
-  199: img199,
-  200: img200,
-  201: img201,
-  202: img202,
-  203: img203,
-  204: img204,
-  205: img205,
-  206: img206,
-  207: img207,
-  208: img208,
-  209: img209,
-  210: img210,
-  211: img211,
-  212: img212,
-  213: img213,
-  214: img214,
-  215: img215,
-  216: img216,
-  217: img217,
-  218: img218,
-  219: img219,
-  220: img220,
-  221: img221,
-  222: img222,
-  223: img223,
-  224: img224,
-  225: img225,
-  226: img226,
-  227: img227,
-  228: img228,
-  229: img229,
-  230: img230,
-  231: img231,
-  232: img232,
-  233: img233,
-  234: img234,
-  235: img235,
-  236: img236,
-  237: img237,
-  238: img238,
-  239: img239,
-  240: img240,
-  241: img241,
-  242: img242,
-  243: img243,
-  244: img244,
-  245: img245,
-  246: img246,
-  247: img247,
-  248: img248,
-  249: img249,
-  250: img250,
-  251: img251,
-  252: img252,
-  253: img253,
-  254: img254,
-  255: img255,
-  256: img256,
-  257: img257,
-  258: img258,
-  259: img259,
-  260: img260,
-  261: img261,
-  262: img262,
-  263: img263,
-  264: img264,
-  265: img265,
-  266: img266,
-  267: img267,
-  268: img268,
-  269: img269,
-  270: img270
+// Create image mapping object with correct imports
+const imageMap = {
+  1: img1, 2: img2, 3: img3, 4: img4, 5: img5, 6: img6, 7: img7, 8: img8, 9: img9, 10: img10,
+  11: img11, 12: img12, 13: img13, 14: img14, 15: img15, 16: img16, 17: img17, 18: img18, 19: img19, 20: img20,
+  21: img21, 22: img22, 23: img23, 24: img24, 25: img25, 26: img26, 27: img27, 28: img28, 29: img29, 30: img30,
+  31: img31, 32: img32, 33: img33, 34: img34, 35: img35, 36: img36, 37: img37, 38: img38, 39: img39, 40: img40,
+  41: img41, 42: img42, 43: img43, 44: img44, 45: img45, 46: img46, 47: img47, 48: img48, 49: img49, 50: img50,
+  51: img51, 52: img52, 53: img53, 54: img54, 55: img55, 56: img56, 57: img57, 58: img58, 59: img59, 60: img60,
+  61: img61, 62: img62, 63: img63, 64: img64, 65: img65, 66: img66, 67: img67, 68: img68, 69: img69, 70: img70,
+  71: img71, 72: img72, 73: img73, 74: img74, 75: img75, 76: img76, 77: img77, 78: img78, 79: img79, 80: img80,
+  81: img81, 82: img82, 83: img83, 84: img84, 85: img85, 86: img86, 87: img87, 88: img88, 89: img89, 90: img90,
+  91: img91, 92: img92, 93: img93, 94: img94, 95: img95, 96: img96, 97: img97, 98: img98, 99: img99, 100: img100,
+  101: img101, 102: img102, 103: img103, 104: img104, 105: img105, 106: img106, 107: img107, 108: img108, 109: img109, 110: img110,
+  111: img111, 112: img112, 113: img113, 114: img114, 115: img115, 116: img116, 117: img117, 118: img118, 119: img119, 120: img120,
+  121: img121, 122: img122, 123: img123, 124: img124, 125: img125, 126: img126, 127: img127, 128: img128, 129: img129, 130: img130,
+  131: img131, 132: img132, 133: img133, 134: img134, 135: img135, 136: img136, 137: img137, 138: img138, 139: img139, 140: img140,
+  141: img141, 142: img142, 143: img143, 144: img144, 145: img145, 146: img146, 147: img147, 148: img148, 149: img149, 150: img150,
+  151: img151, 152: img152, 153: img153, 154: img154, 155: img155, 156: img156, 157: img157, 158: img158, 159: img159, 160: img160,
+  161: img161, 162: img162, 163: img163, 164: img164, 165: img165, 166: img166, 167: img167, 168: img168, 169: img169, 170: img170,
+  171: img171, 172: img172, 173: img173, 174: img174, 175: img175, 176: img176, 177: img177, 178: img178, 179: img179, 180: img180,
+  181: img181, 182: img182, 183: img183, 184: img184, 185: img185, 186: img186, 187: img187, 188: img188, 189: img189, 190: img190,
+  191: img191, 192: img192, 193: img193, 194: img194, 195: img195, 196: img196, 197: img197, 198: img198, 199: img199, 200: img200,
+  201: img201, 202: img202, 203: img203, 204: img204, 205: img205, 206: img206, 207: img207, 208: img208, 209: img209, 210: img210,
+  211: img211, 212: img212, 213: img213, 214: img214, 215: img215, 216: img216, 217: img217, 218: img218, 219: img219, 220: img220,
+  221: img221, 222: img222, 223: img223, 224: img224, 225: img225, 226: img226, 227: img227, 228: img228, 229: img229, 230: img230,
+  231: img231, 232: img232, 233: img233, 234: img234, 235: img235, 236: img236, 237: img237, 238: img238, 239: img239, 240: img240,
+  241: img241, 242: img242, 243: img243, 244: img244, 245: img245, 246: img246, 247: img247, 248: img248, 249: img249, 250: img250,
+  251: img251, 252: img252, 253: img253, 254: img254, 255: img255, 256: img256, 257: img257, 258: img258, 259: img259, 260: img260,
+  261: img261, 262: img262, 263: img263, 264: img264, 265: img265, 266: img266, 267: img267, 268: img268, 269: img269, 270: img270
 };
 
-// Helper function to get image based on product ID
+// Get product image from imported assets
 const getProductImage = (productId) => {
-  return imageMapping[productId];
+  return imageMap[productId] || img1; // Fallback to first image if ID not found
 };
 
-// Theme colors to match hero section
+// Theme colors to match styling
 const themeColors = {
   primary: '#FBBF24', // Yellow-400
   secondary: '#FEF3C7', // Yellow-100
@@ -560,148 +318,516 @@ const themeColors = {
   dark: '#111827' // Gray-900
 };
 
+// Convert category name to URL slug
+const categoryToSlug = (category) => {
+  return category.toLowerCase().replace(/\s+/g, '-');
+};
+
 const Products = () => {
-  // State for selected category and pagination
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  // State for filters, sorting, pagination, etc.
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 16; // Adjust as needed
-  
-  // Get unique categories from the product data
+  const [sortBy, setSortBy] = useState('featured');
+  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [filters, setFilters] = useState({
+    mainCategory: [],
+    subCategory: [],
+    priceRange: { min: 0, max: 100000 }
+  });
+  const [activeFilters, setActiveFilters] = useState(false);
+  const productsPerPage = 6;
+
+  // Get unique categories for filters
   const categories = useMemo(() => {
-    const uniqueCategories = [...new Set(productsData.map(product => product.category))];
-    return ['All', ...uniqueCategories];
+    const mainCats = [...new Set(productsData.map(product => product.mainCategory))].sort();
+    const subCats = [...new Set(productsData.map(product => product.subCategory))].sort();
+    
+    return { mainCategories: mainCats, subCategories: subCats };
+  }, []);
+  
+  // Calculate price range from products
+  const priceRange = useMemo(() => {
+    const prices = productsData.map(product => parseFloat(product.price));
+    return {
+      min: Math.min(...prices),
+      max: Math.max(...prices)
+    };
   }, []);
 
-  // Filter products based on selected category
+  // Apply filters and sorting to products
   const filteredProducts = useMemo(() => {
-    if (selectedCategory === 'All') {
-      return productsData;
+    return productsData.filter(product => {
+      // Apply main category filter if any selected
+      if (filters.mainCategory.length > 0 && !filters.mainCategory.includes(product.mainCategory)) {
+        return false;
+      }
+      
+      // Apply sub category filter if any selected
+      if (filters.subCategory.length > 0 && !filters.subCategory.includes(product.subCategory)) {
+        return false;
+      }
+      
+      // Apply price range filter
+      const price = parseFloat(product.price);
+      return price >= filters.priceRange.min && price <= filters.priceRange.max;
+    });
+  }, [filters]);
+  
+  // Sort filtered products
+  const sortedProducts = useMemo(() => {
+    let sorted = [...filteredProducts];
+    
+    switch (sortBy) {
+      case 'price-low':
+        return sorted.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+      case 'price-high':
+        return sorted.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+      case 'name-asc':
+        return sorted.sort((a, b) => a.name.localeCompare(b.name));
+      case 'name-desc':
+        return sorted.sort((a, b) => b.name.localeCompare(a.name));
+      case 'featured':
+      default:
+        return sorted; // Assume products are already sorted by featured status in the data
     }
-    return productsData.filter(product => product.category === selectedCategory);
-  }, [selectedCategory]);
-
+  }, [filteredProducts, sortBy]);
+  
   // Calculate pagination
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
 
   // Handle page changes
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const nextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
   const prevPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
-
-  // Reset to page 1 when category changes
+  
+  // Reset to page 1 when filters or sort option changes
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedCategory]);
-
-  // Get featured products (one from each category)
-  const featuredProducts = useMemo(() => {
-    const uniqueCategories = [...new Set(productsData.map(product => product.category))];
-    return uniqueCategories.map(category => {
-      // Find the first product from each category
-      return productsData.find(product => product.category === category);
+  }, [filters, sortBy]);
+  
+  // Toggle filter for a category
+  const toggleCategoryFilter = (type, category) => {
+    setFilters(prev => {
+      const current = [...prev[type]];
+      const index = current.indexOf(category);
+      
+      if (index === -1) {
+        current.push(category);
+      } else {
+        current.splice(index, 1);
+      }
+      
+      return { ...prev, [type]: current };
     });
-  }, []);
+  };
+  
+  // Update price range filter
+  const updatePriceRange = (min, max) => {
+    setFilters(prev => ({
+      ...prev,
+      priceRange: { min, max }
+    }));
+  };
+  
+  // Clear all filters
+  const clearFilters = () => {
+    setFilters({
+      mainCategory: [],
+      subCategory: [],
+      priceRange: { min: priceRange.min, max: priceRange.max }
+    });
+  };
+  
+  // Toggle mobile filters
+  const toggleFilters = () => {
+    setActiveFilters(!activeFilters);
+  };
 
   return (
-    <section className="py-16 relative overflow-hidden"
-      style={{
-        background: `radial-gradient(circle at 90% 10%, ${themeColors.secondary}40, transparent 30%),
-                    radial-gradient(circle at 10% 90%, ${themeColors.secondary}40, transparent 30%),
-                    white`
-      }}
-    >
+    <div className="min-h-screen relative overflow-hidden"
+         style={{
+             background: `radial-gradient(circle at 90% 10%, ${themeColors.secondary}40, transparent 30%),
+                         radial-gradient(circle at 10% 90%, ${themeColors.secondary}40, transparent 30%),
+                         white`
+         }}>
       {/* Decorative background elements */}
-      <div className="absolute top-20 right-20 w-64 h-64 rounded-full opacity-10" style={{ backgroundColor: themeColors.primary }}></div>
-      <div className="absolute bottom-20 left-20 w-48 h-48 rounded-full opacity-10" style={{ backgroundColor: themeColors.accent }}></div>
-      
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-12">
-          <div className="inline-block relative mb-3">
-            <span className="inline-block px-4 py-1 rounded-full text-xs font-medium tracking-wide" 
-                  style={{ backgroundColor: themeColors.secondary, color: themeColors.accent }}>
-              PREMIUM EQUIPMENT
-            </span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-3 tracking-tight">Discover Our Product Categories</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">Explore our comprehensive range of professional-grade industrial tools and equipment designed to elevate your productivity</p>
+      <div className="absolute top-20 right-20 w-64 h-64 rounded-full opacity-10" 
+           style={{ backgroundColor: themeColors.primary }}></div>
+      <div className="absolute bottom-20 left-20 w-48 h-48 rounded-full opacity-10" 
+           style={{ backgroundColor: themeColors.accent }}></div>
+
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
+        {/* Breadcrumb */}
+        <div className="mb-8">
+          <nav className="flex" aria-label="Breadcrumb">
+            <ol className="inline-flex items-center space-x-1 md:space-x-3">
+              <li className="inline-flex items-center">
+                <Link to="/" className="text-sm text-gray-500 hover:text-yellow-400">Home</Link>
+              </li>
+              <li aria-current="page">
+                <div className="flex items-center">
+                  <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm text-gray-700 ml-1 md:ml-2">Products</span>
+                </div>
+              </li>
+            </ol>
+          </nav>
         </div>
-        
-        {/* Categories navigation */}
-        <div className="mb-10 overflow-x-auto">
-          <div className="flex flex-wrap gap-2 justify-center">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  selectedCategory === category 
-                    ? 'bg-gray-900 text-white' 
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
+
+        {/* Page Header */}
+        <div className="mb-12">
+          <h1 className="text-4xl font-medium mb-4">Our Products</h1>
+          <p className="text-gray-600 max-w-3xl">
+            Browse our complete range of high-quality products designed for professional and industrial use.
+            Our premium solutions deliver exceptional performance and durability for your business needs.
+          </p>
         </div>
-        
-        {/* Featured categories section - show only when "All" is selected */}
-        {selectedCategory === 'All' && (
-          <>
-            <h3 className="text-2xl font-bold mb-6">Featured Categories</h3>
-            {/* Display the first 4 categories in a grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-              {featuredProducts.slice(0, 4).map((product) => (
-                <div key={product.id} className="group">
-                  <div className="relative rounded-xl overflow-hidden bg-white shadow-sm transition-all duration-300 hover:shadow-md">
-                    <div className="relative aspect-[4/3] overflow-hidden bg-gray-50">
-                      <img 
-                        src={getProductImage(product.id)} 
-                        alt={product.name} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+
+        {/* Main Content with Filters and Products */}
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Filters Sidebar - Desktop */}
+          <div className="lg:w-1/4 hidden lg:block">
+            <div className="bg-white rounded-lg shadow-sm p-5 sticky top-24">
+              <div className="flex justify-between items-center mb-5">
+                <h2 className="text-lg font-medium">Filters</h2>
+                <button 
+                  onClick={clearFilters}
+                  className="text-sm text-yellow-500 hover:text-yellow-700"
+                >
+                  Clear All
+                </button>
+              </div>
+              
+              {/* Main Category Filter */}
+              <div className="mb-6">
+                <h3 className="font-medium mb-3 text-sm text-gray-700">Main Category</h3>
+                <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
+                  {categories.mainCategories.map((category, index) => (
+                    <div key={index} className="flex items-center">
+                      <input
+                        type="checkbox"
+                        id={`main-${index}`}
+                        checked={filters.mainCategory.includes(category)}
+                        onChange={() => toggleCategoryFilter('mainCategory', category)}
+                        className="h-4 w-4 text-yellow-500 focus:ring-yellow-400 rounded"
                       />
-                      
-                      <div className="absolute top-3 left-3 px-3 py-1 rounded text-xs font-medium" 
-                           style={{ backgroundColor: themeColors.primary }}>
-                        {product.category}
-                      </div>
-                      
-                      <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white py-2 px-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                        <a href="#" 
-                           onClick={(e) => { e.preventDefault(); setSelectedCategory(product.category); }}
-                           className="font-medium text-sm flex justify-between items-center">
-                          <span>View category</span>
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                               strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                          </svg>
-                        </a>
-                      </div>
+                      <label htmlFor={`main-${index}`} className="ml-2 text-sm text-gray-700">
+                        {category}
+                      </label>
                     </div>
-                    
-                    <div className="p-4">
-                      <h3 className="font-medium text-base mb-1 truncate">{product.name}</h3>
-                      <div className="flex items-baseline">
-                        <span className="font-medium text-base">$ {product.price} USD</span>
-                        {product.comparePrice && (
-                          <span className="ml-2 text-gray-500 line-through text-xs">$ {product.comparePrice} USD</span>
-                        )}
-                      </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Sub Category Filter */}
+              <div className="mb-6">
+                <h3 className="font-medium mb-3 text-sm text-gray-700">Sub Category</h3>
+                <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
+                  {categories.subCategories.map((category, index) => (
+                    <div key={index} className="flex items-center">
+                      <input
+                        type="checkbox"
+                        id={`sub-${index}`}
+                        checked={filters.subCategory.includes(category)}
+                        onChange={() => toggleCategoryFilter('subCategory', category)}
+                        className="h-4 w-4 text-yellow-500 focus:ring-yellow-400 rounded"
+                      />
+                      <label htmlFor={`sub-${index}`} className="ml-2 text-sm text-gray-700">
+                        {category}
+                      </label>
                     </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Price Range Filter */}
+              <div className="mb-6">
+                <h3 className="font-medium mb-3 text-sm text-gray-700">Price Range</h3>
+                <div className="flex space-x-2 items-center">
+                  <input
+                    type="number"
+                    min={priceRange.min}
+                    max={filters.priceRange.max}
+                    value={filters.priceRange.min}
+                    onChange={(e) => updatePriceRange(Number(e.target.value), filters.priceRange.max)}
+                    className="w-full p-2 border border-gray-200 rounded text-sm"
+                    placeholder="Min"
+                  />
+                  <span className="text-gray-500">to</span>
+                  <input
+                    type="number"
+                    min={filters.priceRange.min}
+                    max={priceRange.max}
+                    value={filters.priceRange.max}
+                    onChange={(e) => updatePriceRange(filters.priceRange.min, Number(e.target.value))}
+                    className="w-full p-2 border border-gray-200 rounded text-sm"
+                    placeholder="Max"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Mobile Filters Button */}
+          <div className="lg:hidden mb-4 flex justify-between items-center">
+            <button 
+              onClick={toggleFilters}
+              className="flex items-center space-x-2 px-4 py-2 bg-gray-100 rounded-lg text-gray-700 hover:bg-gray-200 transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+              </svg>
+              <span>Filters</span>
+              {(filters.mainCategory.length > 0 || filters.subCategory.length > 0) && (
+                <span className="bg-yellow-400 text-xs px-2 py-0.5 rounded-full text-gray-900 font-medium">
+                  {filters.mainCategory.length + filters.subCategory.length}
+                </span>
+              )}
+            </button>
+            
+            {/* View mode toggles */}
+            <div className="flex border border-gray-200 rounded-md overflow-hidden">
+              <button 
+                onClick={() => setViewMode('grid')}
+                className={`p-2 ${viewMode === 'grid' ? 'bg-gray-100' : 'bg-white'}`}
+                aria-label="Grid view"
+              >
+                <svg className="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+              </button>
+              <button 
+                onClick={() => setViewMode('list')}
+                className={`p-2 ${viewMode === 'list' ? 'bg-gray-100' : 'bg-white'}`}
+                aria-label="List view"
+              >
+                <svg className="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          {/* Mobile Filters Panel */}
+          {activeFilters && (
+            <div className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-end">
+              <div className="bg-white w-4/5 h-full overflow-y-auto p-5 flex flex-col">
+                <div className="flex justify-between items-center mb-5">
+                  <h2 className="text-lg font-medium">Filters</h2>
+                  <button onClick={toggleFilters} className="p-1">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                
+                {/* Main Category Filter */}
+                <div className="mb-6">
+                  <h3 className="font-medium mb-3 text-sm text-gray-700">Main Category</h3>
+                  <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
+                    {categories.mainCategories.map((category, index) => (
+                      <div key={index} className="flex items-center">
+                        <input
+                          type="checkbox"
+                          id={`mobile-main-${index}`}
+                          checked={filters.mainCategory.includes(category)}
+                          onChange={() => toggleCategoryFilter('mainCategory', category)}
+                          className="h-4 w-4 text-yellow-500 focus:ring-yellow-400 rounded"
+                        />
+                        <label htmlFor={`mobile-main-${index}`} className="ml-2 text-sm text-gray-700">
+                          {category}
+                        </label>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ))}
+                
+                {/* Sub Category Filter */}
+                <div className="mb-6">
+                  <h3 className="font-medium mb-3 text-sm text-gray-700">Sub Category</h3>
+                  <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
+                    {categories.subCategories.map((category, index) => (
+                      <div key={index} className="flex items-center">
+                        <input
+                          type="checkbox"
+                          id={`mobile-sub-${index}`}
+                          checked={filters.subCategory.includes(category)}
+                          onChange={() => toggleCategoryFilter('subCategory', category)}
+                          className="h-4 w-4 text-yellow-500 focus:ring-yellow-400 rounded"
+                        />
+                        <label htmlFor={`mobile-sub-${index}`} className="ml-2 text-sm text-gray-700">
+                          {category}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Price Range Filter */}
+                <div className="mb-6">
+                  <h3 className="font-medium mb-3 text-sm text-gray-700">Price Range</h3>
+                  <div className="flex space-x-2 items-center">
+                    <input
+                      type="number"
+                      min={priceRange.min}
+                      max={filters.priceRange.max}
+                      value={filters.priceRange.min}
+                      onChange={(e) => updatePriceRange(Number(e.target.value), filters.priceRange.max)}
+                      className="w-full p-2 border border-gray-200 rounded text-sm"
+                      placeholder="Min"
+                    />
+                    <span className="text-gray-500">to</span>
+                    <input
+                      type="number"
+                      min={filters.priceRange.min}
+                      max={priceRange.max}
+                      value={filters.priceRange.max}
+                      onChange={(e) => updatePriceRange(filters.priceRange.min, Number(e.target.value))}
+                      className="w-full p-2 border border-gray-200 rounded text-sm"
+                      placeholder="Max"
+                    />
+                  </div>
+                </div>
+                
+                <div className="mt-auto space-y-3">
+                  <button 
+                    onClick={clearFilters}
+                    className="w-full py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+                  >
+                    Clear All Filters
+                  </button>
+                  <button 
+                    onClick={toggleFilters}
+                    className="w-full py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
+                  >
+                    Apply Filters
+                  </button>
+                </div>
+              </div>
             </div>
-
-            {/* Featured categories continued */}
-            {featuredProducts.length > 4 && (
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
-                <div className="col-span-1 lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {featuredProducts.slice(4, 6).map((product) => (
-                    <div key={product.id} className="group">
+          )}
+          
+          {/* Products Content */}
+          <div className="lg:w-3/4 flex-1">
+            {/* Sorting and summary */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+              <div className="text-sm text-gray-600">
+                Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, sortedProducts.length)} of {sortedProducts.length} products
+              </div>
+              
+              <div className="relative">
+                <select 
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="pl-3 pr-10 py-2 text-sm border border-gray-200 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-yellow-300 appearance-none"
+                >
+                  <option value="featured">Featured</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="name-asc">Name: A to Z</option>
+                  <option value="name-desc">Name: Z to A</option>
+                </select>
+                <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                  <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            
+            {/* Active Filters display */}
+            {(filters.mainCategory.length > 0 || filters.subCategory.length > 0 || 
+              filters.priceRange.min > priceRange.min || filters.priceRange.max < priceRange.max) && (
+              <div className="mb-6 flex flex-wrap gap-2 items-center bg-gray-50 p-3 rounded-lg">
+                <span className="text-sm font-medium text-gray-700">Active Filters:</span>
+                
+                {filters.mainCategory.map((category, index) => (
+                  <span 
+                    key={`main-${index}`} 
+                    className="px-2 py-1 bg-white rounded-md text-xs border border-gray-200 flex items-center"
+                  >
+                    Main: {category}
+                    <button 
+                      onClick={() => toggleCategoryFilter('mainCategory', category)}
+                      className="ml-1 text-gray-400 hover:text-gray-600"
+                    >
+                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </button>
+                  </span>
+                ))}
+                
+                {filters.subCategory.map((category, index) => (
+                  <span 
+                    key={`sub-${index}`} 
+                    className="px-2 py-1 bg-white rounded-md text-xs border border-gray-200 flex items-center"
+                  >
+                    Sub: {category}
+                    <button 
+                      onClick={() => toggleCategoryFilter('subCategory', category)}
+                      className="ml-1 text-gray-400 hover:text-gray-600"
+                    >
+                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </button>
+                  </span>
+                ))}
+                
+                {(filters.priceRange.min > priceRange.min || filters.priceRange.max < priceRange.max) && (
+                  <span className="px-2 py-1 bg-white rounded-md text-xs border border-gray-200 flex items-center">
+                    Price: ${filters.priceRange.min} - ${filters.priceRange.max}
+                    <button 
+                      onClick={() => updatePriceRange(priceRange.min, priceRange.max)}
+                      className="ml-1 text-gray-400 hover:text-gray-600"
+                    >
+                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </button>
+                  </span>
+                )}
+                
+                <button 
+                  onClick={clearFilters}
+                  className="px-2 py-1 text-xs text-yellow-600 hover:text-yellow-800 hover:underline"
+                >
+                  Clear All
+                </button>
+              </div>
+            )}
+            
+            {/* No products found message */}
+            {currentProducts.length === 0 && (
+              <div className="bg-white rounded-lg shadow-sm p-10 text-center">
+                <svg className="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">No products found</h3>
+                <p className="text-gray-600 mb-4">Try adjusting your filters or search criteria</p>
+                <button 
+                  onClick={clearFilters}
+                  className="px-4 py-2 bg-yellow-400 text-gray-900 rounded-md hover:bg-yellow-500 transition-colors"
+                >
+                  Clear Filters
+                </button>
+              </div>
+            )}
+            
+            {/* Products Grid View */}
+            {viewMode === 'grid' && currentProducts.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                {currentProducts.map((product) => (
+                  <div 
+                    key={product.id} 
+                    className="group cursor-pointer"
+                  >
+                    <Link to={`/product/${product.id}`} className="block">
                       <div className="relative rounded-xl overflow-hidden bg-white shadow-sm transition-all duration-300 hover:shadow-md">
                         <div className="relative aspect-[4/3] overflow-hidden bg-gray-50">
                           <img 
@@ -710,26 +836,32 @@ const Products = () => {
                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
                           
+                          {/* Display both categories */}
                           <div className="absolute top-3 left-3 px-3 py-1 rounded text-xs font-medium" 
-                               style={{ backgroundColor: themeColors.primary }}>
-                            {product.category}
+                               style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}>
+                            {product.mainCategory}
+                          </div>
+                          
+                          <div className="absolute top-9 left-3 px-3 py-1 rounded text-xs font-medium bg-white/80 text-gray-700">
+                            {product.subCategory}
                           </div>
                           
                           <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white py-2 px-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                            <a href="#" 
-                               onClick={(e) => { e.preventDefault(); setSelectedCategory(product.category); }}
-                               className="font-medium text-sm flex justify-between items-center">
-                              <span>View category</span>
+                            <div className="font-medium text-sm flex justify-between items-center">
+                              <span>View details</span>
                               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
                                    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                               </svg>
-                            </a>
+                            </div>
                           </div>
                         </div>
                         
                         <div className="p-4">
                           <h3 className="font-medium text-base mb-1 truncate">{product.name}</h3>
+                          <p className="text-sm text-gray-600 mb-2 line-clamp-2" title={product.description}>
+                            {product.description}
+                          </p>
                           <div className="flex items-baseline">
                             <span className="font-medium text-base">$ {product.price} USD</span>
                             {product.comparePrice && (
@@ -738,203 +870,140 @@ const Products = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-                
-                {/* Last featured category */}
-                {featuredProducts.slice(6, 7).map((product) => (
-                  <div key={product.id} className="col-span-1 flex flex-col h-full">
-                    <div className="flex-grow h-full rounded-xl overflow-hidden relative">
-                      <div className="absolute inset-0">
-                        <img 
-                          src={getProductImage(product.id)} 
-                          alt={product.name} 
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/70 to-gray-900/90"></div>
-                      </div>
-                      
-                      <div className="relative h-full flex flex-col justify-end p-6 text-white">
-                        <div className="mb-4">
-                          <span className="inline-block px-3 py-1 rounded text-xs font-medium mb-4" 
-                                style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}>
-                            {product.category}
-                          </span>
-                          <h2 className="text-2xl font-bold mb-2">{product.name}</h2>
-                          <p className="text-white/80 text-sm mb-4">Precision engineered for professional performance and reliability</p>
-                          <p className="mb-6">
-                            <span className="text-xl font-medium">$ {product.price} USD</span>
-                            {product.comparePrice && (
-                              <span className="ml-2 text-gray-300 line-through text-sm">$ {product.comparePrice} USD</span>
-                            )}
-                          </p>
-                        </div>
-                        
-                        <div className="flex flex-col gap-3">
-                          <a href="#" 
-                             onClick={(e) => { e.preventDefault(); setSelectedCategory(product.category); }}
-                             className="group relative overflow-hidden rounded-lg px-4 py-2 font-medium text-center transition-all duration-300"
-                             style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}
-                          >
-                            <span className="relative z-10 flex items-center justify-center gap-2">
-                              View Category
-                              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                              </svg>
-                            </span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
+                    </Link>
                   </div>
                 ))}
               </div>
             )}
-          </>
-        )}
-        
-        {/* Product listing section */}
-        <div>
-          {selectedCategory !== 'All' && (
-            <h3 className="text-2xl font-bold mb-6">{selectedCategory}</h3>
-          )}
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {currentProducts.map((product) => (
-              <div key={product.id} className="group">
-                <div className="relative rounded-xl overflow-hidden bg-white shadow-sm transition-all duration-300 hover:shadow-md">
-                  <div className="relative aspect-[4/3] overflow-hidden bg-gray-50">
-                    <img 
-                      src={getProductImage(product.id)} 
-                      alt={product.name} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    
-                    <div className="absolute top-3 left-3 px-3 py-1 rounded text-xs font-medium" 
-                          style={{ backgroundColor: themeColors.primary }}>
-                      {product.category}
-                    </div>
-                    
-                    <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white py-2 px-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <a href={`/product/${product.id}`} className="font-medium text-sm flex justify-between items-center">
-                        <span>View product</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                              strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                      </a>
-                    </div>
+            
+            {/* Products List View */}
+            {viewMode === 'list' && currentProducts.length > 0 && (
+              <div className="space-y-4 mb-12">
+                {currentProducts.map((product) => (
+                  <div 
+                    key={product.id} 
+                    className="group cursor-pointer bg-white rounded-xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md flex"
+                  >
+                    <Link to={`/product/${product.id}`} className="flex w-full">
+                      <div className="w-1/3 lg:w-1/4 relative">
+                        <div className="aspect-[4/3] relative overflow-hidden bg-gray-50 h-full">
+                          <img 
+                            src={getProductImage(product.id)} 
+                            alt={product.name} 
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          
+                          {/* Display both main and sub categories */}
+                          <div className="absolute top-3 left-3 px-3 py-1 rounded text-xs font-medium" 
+                               style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}>
+                            {product.mainCategory}
+                          </div>
+                          
+                          <div className="absolute top-9 left-3 px-3 py-1 rounded text-xs font-medium bg-white/80 text-gray-700">
+                            {product.subCategory}
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="w-2/3 lg:w-3/4 p-4 flex flex-col justify-between">
+                        <div>
+                          <h3 className="font-medium text-lg mb-1">{product.name}</h3>
+                          <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                            {product.description}
+                          </p>
+                        </div>
+                        
+                        <div className="flex flex-wrap justify-between items-end">
+                          <div className="flex items-baseline">
+                            <span className="font-medium text-lg">$ {product.price} USD</span>
+                            {product.comparePrice && (
+                              <span className="ml-2 text-gray-500 line-through text-sm">$ {product.comparePrice} USD</span>
+                            )}
+                          </div>
+                          
+                          <div className="flex gap-2 mt-2 sm:mt-0">
+                            <button 
+                              className="px-3 py-1 rounded-md text-sm font-medium bg-gray-900 text-white transition-colors hover:bg-yellow-400 hover:text-gray-900"
+                            >
+                              View Details
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
                   </div>
+                ))}
+              </div>
+            )}
+            
+            {/* Pagination */}
+            {sortedProducts.length > productsPerPage && (
+              <div className="flex justify-center mt-10">
+                <div className="flex flex-wrap space-x-2">
+                  <button 
+                    onClick={prevPage} 
+                    disabled={currentPage === 1}
+                    className={`px-4 py-2 rounded-md ${
+                      currentPage === 1 
+                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    Previous
+                  </button>
                   
-                  <div className="p-4">
-                    <h3 className="font-medium text-base mb-1 truncate">{product.name}</h3>
-                    <p className="text-sm text-gray-600 mb-2 line-clamp-2" title={product.description}>
-                      {product.description}
-                    </p>
-                    <div className="flex items-baseline">
-                      <span className="font-medium text-base">$ {product.price} USD</span>
-                      {product.comparePrice && (
-                        <span className="ml-2 text-gray-500 line-through text-xs">$ {product.comparePrice} USD</span>
-                      )}
-                    </div>
-                  </div>
+                  {[...Array(totalPages)].map((_, index) => {
+                    // Show limited number of page buttons
+                    if (
+                      index === 0 || 
+                      index === totalPages - 1 || 
+                      (index >= currentPage - 2 && index <= currentPage + 1)
+                    ) {
+                      return (
+                        <button
+                          key={index}
+                          onClick={() => paginate(index + 1)}
+                          className={`px-4 py-2 rounded-md ${
+                            currentPage === index + 1 
+                              ? 'bg-yellow-400 text-white' 
+                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          }`}
+                        >
+                          {index + 1}
+                        </button>
+                      );
+                    }
+                    
+                    // Show ellipsis for skipped pages
+                    if (index === 1 && currentPage > 3) {
+                      return <span key="start-ellipsis" className="px-3 py-2">...</span>;
+                    }
+                    
+                    if (index === totalPages - 2 && currentPage < totalPages - 2) {
+                      return <span key="end-ellipsis" className="px-3 py-2">...</span>;
+                    }
+                    
+                    return null;
+                  })}
+                  
+                  <button 
+                    onClick={nextPage} 
+                    disabled={currentPage === totalPages}
+                    className={`px-4 py-2 rounded-md ${
+                      currentPage === totalPages 
+                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    Next
+                  </button>
                 </div>
               </div>
-            ))}
+            )}
           </div>
-          
-          {/* Show message when no products are found */}
-          {currentProducts.length === 0 && (
-            <div className="py-12 text-center">
-              <p className="text-lg text-gray-600">No products found in this category.</p>
-            </div>
-          )}
         </div>
-        
-        {/* Pagination */}
-        {filteredProducts.length > productsPerPage && (
-          <div className="mt-12 flex justify-center">
-            <div className="flex flex-wrap justify-center gap-2">
-              <button 
-                onClick={prevPage} 
-                disabled={currentPage === 1}
-                className={`px-4 py-2 rounded-md ${
-                  currentPage === 1 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                Previous
-              </button>
-              
-              {/* Generate page numbers */}
-              {[...Array(totalPages)].map((_, i) => {
-                // Show limited page numbers for better UX when there are many pages
-                if (
-                  i === 0 || // First page
-                  i === totalPages - 1 || // Last page
-                  (i >= currentPage - 2 && i <= currentPage + 1) // Pages around current
-                ) {
-                  return (
-                    <button
-                      key={i + 1}
-                      onClick={() => paginate(i + 1)}
-                      className={`px-4 py-2 rounded-md ${
-                        currentPage === i + 1 ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                    >
-                      {i + 1}
-                    </button>
-                  );
-                }
-                
-                // Show ellipsis for skipped pages
-                if (i === 1 && currentPage > 3) {
-                  return <span key="start-ellipsis" className="px-3 py-2">...</span>;
-                }
-                
-                if (i === totalPages - 2 && currentPage < totalPages - 2) {
-                  return <span key="end-ellipsis" className="px-3 py-2">...</span>;
-                }
-                
-                return null;
-              })}
-              
-              <button 
-                onClick={nextPage} 
-                disabled={currentPage === totalPages}
-                className={`px-4 py-2 rounded-md ${
-                  currentPage === totalPages ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        )}
-        
-        {/* View all categories button - only show when a specific category is selected */}
-        {selectedCategory !== 'All' && (
-          <div className="mt-12 text-center">
-            <button 
-              onClick={() => setSelectedCategory('All')}
-              className="group relative overflow-hidden px-8 py-3 rounded-full font-medium text-white inline-flex items-center transition-all duration-300"
-              style={{ backgroundColor: themeColors.dark }}
-            >
-              <span className="relative z-10 flex items-center justify-center gap-2">
-                View All Categories
-                <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                </svg>
-              </span>
-              <span 
-                className="absolute inset-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
-                style={{ backgroundColor: themeColors.accent }}
-              ></span>
-            </button>
-          </div>
-        )}
       </div>
-    </section>
+    </div>
   );
 };
 

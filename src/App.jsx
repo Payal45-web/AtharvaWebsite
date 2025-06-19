@@ -1,11 +1,13 @@
-
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import AboutUs from './pages/AboutUs';
 import ProductCategoryDetail from './pages/ProductsCategoryDetail';
 import ProductDetail from './pages/ProductsDetail';
+import Products from './components/Products'; // Import the new ProductsPage component
+import SearchResults from './pages/SearchResults'; // Import the SearchResults component (you'll need to create this)
 
 // Custom hook for page transitions
 const usePageTransition = () => {
@@ -67,19 +69,22 @@ function App() {
       <main className="flex-grow pt-16">
         <Routes location={location}>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/about-us" element={<div className="container mx-auto px-4 py-24"><h1 className="text-3xl font-bold">About Us</h1></div>} />
-          <Route path="/services" element={<div className="container mx-auto px-4 py-24"><h1 className="text-3xl font-bold">Services</h1></div>} />
-          <Route path="/industries" element={<div className="container mx-auto px-4 py-24"><h1 className="text-3xl font-bold">Industries</h1></div>} />
-          <Route path="/contact-us" element={<div className="container mx-auto px-4 py-24"><h1 className="text-3xl font-bold">Contact Us</h1></div>} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/search" element={<SearchResults />} />
+          <Route path="/services" element={<div className="container mx-auto px-4 py-24"><h1 className="text-3xl font-medium">Services</h1></div>} />
+          <Route path="/industries" element={<div className="container mx-auto px-4 py-24"><h1 className="text-3xl font-medium">Industries</h1></div>} />
+          <Route path="/contact-us" element={<div className="container mx-auto px-4 py-24"><h1 className="text-3xl font-medium">Contact Us</h1></div>} />
+          <Route path="/catalog" element={<div className="container mx-auto px-4 py-24"><h1 className="text-3xl font-medium">Product Catalog</h1><p className="mt-4">Download our latest product catalog.</p></div>} />
           
           {/* Product routes */}
-          <Route path="/category/:categorySlug" element={<ProductCategoryDetail />} />
+          <Route path="/category/:categoryType/:categorySlug" element={<ProductCategoryDetail />} />
           <Route path="/product/:productSlug" element={<ProductDetail />} />
           
           {/* 404 route */}
           <Route path="*" element={
             <div className="container mx-auto px-4 py-24 text-center">
-              <h1 className="text-5xl font-bold mb-6">404</h1>
+              <h1 className="text-5xl font-medium mb-6">404</h1>
               <h2 className="text-2xl mb-4">Page Not Found</h2>
               <p className="text-gray-600 mb-8">The page you are looking for doesn't exist or has been moved.</p>
               <a href="/" className="px-6 py-3 bg-yellow-400 text-gray-900 font-medium rounded-md hover:bg-yellow-500 transition-colors">

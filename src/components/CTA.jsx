@@ -28,16 +28,16 @@ const CTA = () => {
             {/* Content */}
             <div className="relative z-10 p-8 md:p-10">
               <div className="inline-block px-4 py-1 rounded-full bg-yellow-400 bg-opacity-10 border border-yellow-400 border-opacity-30 mb-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-yellow-600">Big Sale</span>
+                <span className="text-xs font-medium uppercase tracking-wider text-yellow-600">Big Sale</span>
               </div>
               
-              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 leading-tight">
+              <h3 className="text-2xl md:text-3xl font-medium text-gray-900 mb-4 leading-tight">
                 Spring into savings: <br/><span className="text-yellow-500">shop our sale!</span>
               </h3>
               
               <div className="mb-6">
                 <div className="text-sm text-gray-500 mb-1">From:</div>
-                <div className="text-xl font-bold text-gray-800 flex items-center">
+                <div className="text-xl font-medium text-gray-800 flex items-center">
                   <span className="mr-2">20% off</span>
                   <svg width="20" height="8" viewBox="0 0 20 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M19.3536 4.35355C19.5488 4.15829 19.5488 3.84171 19.3536 3.64645L16.1716 0.464466C15.9763 0.269204 15.6597 0.269204 15.4645 0.464466C15.2692 0.659728 15.2692 0.976311 15.4645 1.17157L18.2929 4L15.4645 6.82843C15.2692 7.02369 15.2692 7.34027 15.4645 7.53553C15.6597 7.7308 15.9763 7.7308 16.1716 7.53553L19.3536 4.35355ZM0 4.5H19V3.5H0V4.5Z" fill="#F59E0B"/>
@@ -48,7 +48,7 @@ const CTA = () => {
               
               <a 
                 href="/sale-product" 
-                className="inline-flex items-center group/btn font-bold relative overflow-hidden"
+                className="inline-flex items-center group/btn font-medium relative overflow-hidden"
               >
                 <span className="relative z-10 py-3 px-6 border-2 border-yellow-400 rounded-lg text-gray-900 bg-white group-hover/btn:text-white transition-colors duration-300">
                   Sale products
@@ -81,19 +81,19 @@ const CTA = () => {
             <div className="relative z-10 p-8 md:p-10 flex flex-col h-full justify-end text-white">
               <div className="mb-6">
                 <div className="inline-block px-4 py-1 rounded-full bg-yellow-400 bg-opacity-20 mb-4 border border-yellow-400 border-opacity-30">
-                  <span className="text-xs font-bold uppercase tracking-wider text-yellow-300">Limited Time</span>
+                  <span className="text-xs font-medium uppercase tracking-wider text-yellow-300">Limited Time</span>
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold mb-2">
+                <h3 className="text-xl md:text-2xl font-medium mb-2">
                   <span className="opacity-90">Flat </span>
                   <span className="text-yellow-400">40% off</span>
                   <span className="opacity-90"> on the first order</span>
                 </h3>
-                <h2 className="text-2xl md:text-3xl font-bold text-white"><span className="text-yellow-400">GEARO</span> bars tool</h2>
+                <h2 className="text-2xl md:text-3xl font-medium text-white"><span className="text-yellow-400">Atharva EnterprisesO</span> bars tool</h2>
               </div>
               
               <a 
                 href="/shop" 
-                className="inline-flex items-center group/btn font-bold relative overflow-hidden self-start"
+                className="inline-flex items-center group/btn font-medium relative overflow-hidden self-start"
               >
                 <span className="relative z-10 py-3 px-6 bg-yellow-400 rounded-lg text-gray-900 group-hover/btn:bg-white transition-colors duration-300">
                   Shop now

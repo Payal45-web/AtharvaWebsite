@@ -15,13 +15,13 @@ const Footer = () => {
           <div className="lg:col-span-4 flex flex-col items-center lg:items-start">
             <a href="/" className="mb-6 transform hover:scale-105 transition-transform duration-300">
               <img 
-                src="https://cdn.prod.website-files.com/65b9cce908217ff5cd624b00/65bc9d1bf0d88e12d9cc0fe5_gearo-light-logo.svg" 
-                alt="Gearo Logo" 
+                src="https://cdn.prod.website-files.com/65b9cce908217ff5cd624b00/65bc9d1bf0d88e12d9cc0fe5_Atharva Enterpriseso-light-logo.svg" 
+                alt="Atharva Enterprises" 
                 className="h-12" 
               />
             </a>
             <p className="text-gray-400 text-sm leading-relaxed text-center lg:text-left">
-              At Gearo, we embark on a relentless pursuit of excellence, driven by a passion for craftsmanship and innovation. Our story is woven with a commitment to providing artisans.
+              At Atharva Enterpriseso, we embark on a relentless pursuit of excellence, driven by a passion for craftsmanship and innovation. Our story is woven with a commitment to providing artisans.
             </p>
           </div>
           

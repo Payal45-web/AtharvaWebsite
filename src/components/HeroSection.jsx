@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import img1 from '../assets/1.jpg';
+import img2 from '../assets/2.jpg';
+import img3 from '../assets/3.jpg';
+import img4 from '../assets/4.jpg';
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -14,7 +18,7 @@ const HeroSection = () => {
       price: "$1,245.00 USD",
       comparePrice: "$1,420.00 USD",
       description: "Explore the art of creation with confidence, equipped with the finest tools and accessories handpicked for the.",
-      image: "https://cdn.prod.website-files.com/65ba0e3e13e1be28866fc5db/65bb4a0b7405c939dd944b35_02.png",
+      image: img1,
       specs: [
         { label: "Product type:", value: "Rotary drill" },
         { label: "Chuck Capacity:", value: "0-6.5mm" },
@@ -29,7 +33,7 @@ const HeroSection = () => {
       price: "$1,209.00 USD",
       comparePrice: "$1,500.00 USD",
       description: "Designed for use by electricians and professionals working with electrical installations.",
-      image: "https://cdn.prod.website-files.com/65ba0e3e13e1be28866fc5db/65bb349d55e5eaeb85363733_big-product-02.png",
+      image: img2,
       specs: [
         { label: "Product type:", value: "Wire Cutter" },
         { label: "Chuck Capacity:", value: "Diameter" },
@@ -44,7 +48,7 @@ const HeroSection = () => {
       price: "$189.00 USD",
       comparePrice: "$230.00 USD",
       description: "The cord provides a continuous power supply, eliminating the need for batteries or recharging.",
-      image: "https://cdn.prod.website-files.com/65ba0e3e13e1be28866fc5db/65bb34c5f67961724fc12d83_big-product-03.png",
+      image: img3,
       specs: [
         { label: "Product type:", value: "lubrication" },
         { label: "Chuck Capacity:", value: "0-3.5mm" },
@@ -59,7 +63,7 @@ const HeroSection = () => {
       price: "$240.00 USD",
       comparePrice: "$430.00 USD",
       description: "Depending on the model, faced hammers come with changeable faces of different hardness or materials for tasks.",
-      image: "https://cdn.prod.website-files.com/65ba0e3e13e1be28866fc5db/65bb347cbebb7a59ea258205_big-product-04.png",
+      image: img4,
       specs: [
         { label: "Product type:", value: "Hard faces" },
         { label: "Chuck Capacity:", value: "Nuts & bolts" },
@@ -222,15 +226,15 @@ const HeroSection = () => {
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.7 }}
             >
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight leading-tight">{activeSlide.productTitle}</h2>
+              <h2 className="text-2xl md:text-3xl font-medium tracking-tight leading-tight">{activeSlide.productTitle}</h2>
               
               <div className="flex items-end gap-4">
                 <div className="flex flex-col">
                   <span className="text-sm text-gray-500 line-through">{activeSlide.comparePrice}</span>
-                  <span className="text-3xl font-bold">{activeSlide.price}</span>
+                  <span className="text-3xl font-medium">{activeSlide.price}</span>
                 </div>
                 <div 
-                  className="rounded-lg px-3 py-1.5 text-sm font-bold"
+                  className="rounded-lg px-3 py-1.5 text-sm font-medium"
                   style={{ backgroundColor: themeColors.primary }}
                 >
                   {activeSlide.discount}
@@ -389,7 +393,7 @@ const HeroSection = () => {
                 className="rounded-xl p-5 space-y-4 backdrop-blur-sm bg-white/50 shadow-sm"
                 style={{ border: `1px solid ${themeColors.primaryLight}` }}
               >
-                <h3 className="font-bold text-lg flex items-center gap-2">
+                <h3 className="font-medium text-lg flex items-center gap-2">
                   <span 
                     className="w-2 h-8 rounded-full inline-block"
                     style={{ backgroundColor: themeColors.primary }}

@@ -54,7 +54,7 @@ const Facilities = () => {
                   {[...Array(7)].map((_, index) => (
                     <div key={index} className="inline-block mx-4">
                       <span className="text-white text-sm">Free shipping on orders over </span>
-                      <span className="text-yellow-500 font-bold text-sm">$150</span>
+                      <span className="text-yellow-500 font-medium text-sm">$150</span>
                     </div>
                   ))}
                 </div>
@@ -63,13 +63,13 @@ const Facilities = () => {
             
             {/* Right Column - Content - Made more compact */}
             <div className="py-6">
-              <h2 className="text-2xl font-bold mb-3">Our craftsmanship journey</h2>
+              <h2 className="text-2xl font-medium mb-3">Our craftsmanship journey</h2>
               <p className="text-gray-300 text-sm mb-4">
-                At Gearo, we embark on a relentless pursuit of excellence, driven by a passion for craftsmanship and innovation. Our story is woven with a commitment to providing artisans.
+                At Atharva Enterpriseso, we embark on a relentless pursuit of excellence, driven by a passion for craftsmanship and innovation. Our story is woven with a commitment to providing artisans.
               </p>
               <a 
                 href="/about-us" 
-                className="inline-block bg-yellow-500 text-black font-bold py-2 px-5 rounded-md hover:bg-yellow-600 transition-colors duration-300 mb-6 text-sm"
+                className="inline-block bg-yellow-500 text-black font-medium py-2 px-5 rounded-md hover:bg-yellow-600 transition-colors duration-300 mb-6 text-sm"
               >
                 Know more about us
               </a>
@@ -77,11 +77,11 @@ const Facilities = () => {
               {/* Stats Counter - Made more compact */}
               <div className="grid grid-cols-2 gap-4 mt-2">
                 <div>
-                  <h3 className="text-2xl font-bold mb-1">30</h3>
+                  <h3 className="text-2xl font-medium mb-1">30</h3>
                   <p className="text-gray-300 text-xs">Total tools</p>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold mb-1">350<span className="text-yellow-500">+</span></h3>
+                  <h3 className="text-2xl font-medium mb-1">350<span className="text-yellow-500">+</span></h3>
                   <p className="text-gray-300 text-xs">Happy customers</p>
                 </div>
               </div>
@@ -102,7 +102,7 @@ const Facilities = () => {
                   alt={feature.title}
                   className="h-12 w-12 mb-3"
                 />
-                <h3 className="text-lg font-bold mb-1">{feature.title}</h3>
+                <h3 className="text-lg font-medium mb-1">{feature.title}</h3>
                 <p className="text-gray-600 text-sm">{feature.description}</p>
               </div>
             ))}
