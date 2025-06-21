@@ -4,8 +4,6 @@ import productsData from '../components/Products.json';
 
 // Helper function to get image based on product ID (placeholder)
 const getProductImage = (productId) => {
-  // In a real app, you would import and map all images
-  // This is a placeholder function assuming you have images named by product ID
   return `/assets/${productId}.jpg`;
 };
 
@@ -53,18 +51,12 @@ const SearchResults = () => {
     let sorted = [...searchResults];
     
     switch (sortBy) {
-      case 'price-low':
-        return sorted.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-      case 'price-high':
-        return sorted.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
       case 'name-asc':
         return sorted.sort((a, b) => a.name.localeCompare(b.name));
       case 'name-desc':
         return sorted.sort((a, b) => b.name.localeCompare(a.name));
       case 'relevance':
       default:
-        // For relevance sorting, we could use a more complex algorithm
-        // For now, we'll just keep the original order (assuming it's by relevance)
         return sorted;
     }
   }, [searchResults, sortBy]);
@@ -111,7 +103,7 @@ const SearchResults = () => {
                   <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-sm text-gray-700 ml-1 md:ml-2">Search Results</span>
+                  <span className="text-sm text-gray-700 ml-1 md:ml-2">Product Search</span>
                 </div>
               </li>
             </ol>
@@ -120,11 +112,11 @@ const SearchResults = () => {
 
         {/* Search Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-medium mb-4">Search Results</h1>
+          <h1 className="text-4xl font-medium mb-4">Product Search</h1>
           <p className="text-gray-600 max-w-3xl">
             {searchResults.length > 0
-              ? `Found ${searchResults.length} results for "${query}"`
-              : `No results found for "${query}". Try different keywords or browse our product categories.`
+              ? `Found ${searchResults.length} products matching "${query}"`
+              : `No products found for "${query}". Try different keywords or explore our product categories.`
             }
           </p>
         </div>
@@ -153,7 +145,7 @@ const SearchResults = () => {
               type="submit"
               className="px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-yellow-400 hover:text-gray-900 transition-colors font-medium"
             >
-              Search Again
+              Search Products
             </button>
           </form>
         </div>
@@ -164,13 +156,13 @@ const SearchResults = () => {
             <svg className="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No results found</h3>
-            <p className="text-gray-600 mb-4">Try different search terms or browse our product categories</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No Products Found</h3>
+            <p className="text-gray-600 mb-4">Try different search terms or browse our product catalog.</p>
             <Link 
               to="/products" 
               className="px-4 py-2 bg-yellow-400 text-gray-900 rounded-md hover:bg-yellow-500 transition-colors"
             >
-              Browse All Products
+              Explore Catalog
             </Link>
           </div>
         )}
@@ -179,7 +171,7 @@ const SearchResults = () => {
         {searchResults.length > 0 && (
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
             <div className="text-sm text-gray-600">
-              Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, sortedResults.length)} of {sortedResults.length} results
+              Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, sortedResults.length)} of {sortedResults.length} products
             </div>
             
             <div className="flex gap-4 items-center">
@@ -213,8 +205,6 @@ const SearchResults = () => {
                   className="pl-3 pr-10 py-2 text-sm border border-gray-200 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-yellow-300 appearance-none"
                 >
                   <option value="relevance">Relevance</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
                   <option value="name-asc">Name: A to Z</option>
                   <option value="name-desc">Name: Z to A</option>
                 </select>
@@ -257,7 +247,7 @@ const SearchResults = () => {
                       
                       <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white py-2 px-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                         <div className="font-medium text-sm flex justify-between items-center">
-                          <span>View details</span>
+                          <span>View Specifications</span>
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
                                strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -271,12 +261,6 @@ const SearchResults = () => {
                       <p className="text-sm text-gray-600 mb-2 line-clamp-2" title={product.description}>
                         {product.description}
                       </p>
-                      <div className="flex items-baseline">
-                        <span className="font-medium text-base">$ {product.price} USD</span>
-                        {product.comparePrice && (
-                          <span className="ml-2 text-gray-500 line-through text-xs">$ {product.comparePrice} USD</span>
-                        )}
-                      </div>
                     </div>
                   </div>
                 </Link>
@@ -322,19 +306,10 @@ const SearchResults = () => {
                       </p>
                     </div>
                     
-                    <div className="flex flex-wrap justify-between items-end">
-                      <div className="flex items-baseline">
-                        <span className="font-medium text-lg">$ {product.price} USD</span>
-                        {product.comparePrice && (
-                          <span className="ml-2 text-gray-500 line-through text-sm">$ {product.comparePrice} USD</span>
-                        )}
-                      </div>
-                      
-                      <div className="flex gap-2 mt-2 sm:mt-0">
-                        <span className="px-3 py-1 rounded-md text-sm font-medium bg-gray-900 text-white transition-colors hover:bg-yellow-400 hover:text-gray-900">
-                          View Details
-                        </span>
-                      </div>
+                    <div className="flex gap-2 mt-2 sm:mt-0">
+                      <span className="px-3 py-1 rounded-md text-sm font-medium bg-gray-900 text-white transition-colors hover:bg-yellow-400 hover:text-gray-900">
+                        View Specifications
+                      </span>
                     </div>
                   </div>
                 </Link>
@@ -360,7 +335,6 @@ const SearchResults = () => {
               </button>
               
               {[...Array(totalPages)].map((_, index) => {
-                // Show limited number of page buttons
                 if (
                   index === 0 || 
                   index === totalPages - 1 || 
@@ -381,7 +355,6 @@ const SearchResults = () => {
                   );
                 }
                 
-                // Show ellipsis for skipped pages
                 if (index === 1 && currentPage > 3) {
                   return <span key="start-ellipsis" className="px-3 py-2">...</span>;
                 }
@@ -411,10 +384,9 @@ const SearchResults = () => {
         {/* Related Categories */}
         {searchResults.length > 0 && (
           <div className="mt-16 mb-12 p-8 bg-gray-50 rounded-xl border border-gray-100">
-            <h2 className="text-xl font-medium mb-4">Browse Product Categories</h2>
+            <h2 className="text-xl font-medium mb-4">Explore Product Categories</h2>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {/* Extract categories from search results */}
               {[...new Set(currentProducts.map(product => product.mainCategory))]
                 .slice(0, 4)
                 .map((category, index) => (
@@ -435,7 +407,7 @@ const SearchResults = () => {
                 to="/products"
                 className="inline-flex items-center justify-center px-6 py-3 bg-gray-900 text-white text-sm rounded-md hover:bg-yellow-400 hover:text-gray-900 transition-all duration-300"
               >
-                View All Products
+                Explore Full Catalog
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                 </svg>

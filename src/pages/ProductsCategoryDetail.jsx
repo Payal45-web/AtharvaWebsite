@@ -310,7 +310,7 @@ const getProductImage = (productId) => {
   return imageMapping[productId] || img1; // Fallback to first image if ID not found
 };
 
-// Theme colors to match hero section
+// Theme colors to match styling
 const themeColors = {
   primary: '#FBBF24', // Yellow-400
   secondary: '#FEF3C7', // Yellow-100
@@ -322,7 +322,7 @@ const ProductCategoryDetail = () => {
   const { categoryType, categorySlug } = useParams();
   const navigate = useNavigate();
   
-  // State for pagination and filtering
+  // State for pagination and sorting
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState('featured');
   const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
@@ -330,7 +330,6 @@ const ProductCategoryDetail = () => {
   
   // Convert category slug to actual category name
   const getCategoryFromSlug = (slug) => {
-    // Convert slug like "vacuum-cleaner" to "Vacuum Cleaner"
     return slug
       .split('-')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -358,17 +357,13 @@ const ProductCategoryDetail = () => {
     let sorted = [...filteredProducts];
     
     switch (sortBy) {
-      case 'price-low':
-        return sorted.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-      case 'price-high':
-        return sorted.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
       case 'name-asc':
         return sorted.sort((a, b) => a.name.localeCompare(b.name));
       case 'name-desc':
         return sorted.sort((a, b) => b.name.localeCompare(a.name));
       case 'featured':
       default:
-        return sorted; // Assume products are already sorted by featured status in the data
+        return sorted;
     }
   }, [filteredProducts, sortBy]);
   
@@ -393,21 +388,18 @@ const ProductCategoryDetail = () => {
     navigate(`/product/${productId}`);
   };
 
-  // Get related categories (in a real app, this would come from an API)
+  // Get related categories
   const getRelatedCategories = () => {
     if (categoryType === 'main') {
-      // Get all subcategories for this main category
       const subcategories = [...new Set(filteredProducts.map(product => product.subCategory))];
-      return subcategories.slice(0, 6); // Limit to 6 related subcategories
+      return subcategories.slice(0, 6);
     } else if (categoryType === 'sub') {
-      // Get all main categories that contain this subcategory
       const mainCategoriesWithThisSub = [...new Set(
         productsData
           .filter(product => product.subCategory.toLowerCase() === categoryName.toLowerCase())
           .map(product => product.mainCategory)
       )];
       
-      // Get other subcategories from these main categories
       let relatedSubcategories = [];
       mainCategoriesWithThisSub.forEach(mainCat => {
         const subs = [...new Set(
@@ -418,7 +410,7 @@ const ProductCategoryDetail = () => {
         relatedSubcategories = [...relatedSubcategories, ...subs];
       });
       
-      return [...new Set(relatedSubcategories)].slice(0, 6); // Remove duplicates and limit to 6
+      return [...new Set(relatedSubcategories)].slice(0, 6);
     }
     return [];
   };
@@ -433,7 +425,6 @@ const ProductCategoryDetail = () => {
         path: `/category/main/${categorySlug}`
       };
     } else if (categoryType === 'sub') {
-      // Find main category that contains this subcategory
       const product = productsData.find(p => p.subCategory.toLowerCase() === categoryName.toLowerCase());
       const mainCategory = product ? product.mainCategory : '';
       const mainCategorySlug = mainCategory.toLowerCase().replace(/\s+/g, '-');
@@ -458,7 +449,6 @@ const ProductCategoryDetail = () => {
                            radial-gradient(circle at 10% 90%, ${themeColors.secondary}40, transparent 30%),
                            white`
            }}>
-        {/* Decorative background elements */}
         <div className="absolute top-20 right-20 w-64 h-64 rounded-full opacity-10" 
              style={{ backgroundColor: themeColors.primary }}></div>
         <div className="absolute bottom-20 left-20 w-48 h-48 rounded-full opacity-10" 
@@ -473,7 +463,7 @@ const ProductCategoryDetail = () => {
               className="px-6 py-3 rounded-full font-medium transition-colors"
               style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}
             >
-              Browse All Products
+              Explore Catalog
             </button>
           </div>
         </div>
@@ -488,14 +478,12 @@ const ProductCategoryDetail = () => {
                          radial-gradient(circle at 10% 90%, ${themeColors.secondary}40, transparent 30%),
                          white`
          }}>
-      {/* Decorative background elements */}
       <div className="absolute top-20 right-20 w-64 h-64 rounded-full opacity-10" 
            style={{ backgroundColor: themeColors.primary }}></div>
       <div className="absolute bottom-20 left-20 w-48 h-48 rounded-full opacity-10" 
            style={{ backgroundColor: themeColors.accent }}></div>
       
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
-        {/* Breadcrumb */}
         <div className="mb-8">
           <nav className="flex" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
@@ -534,7 +522,6 @@ const ProductCategoryDetail = () => {
           </nav>
         </div>
       
-        {/* Category Header */}
         <div className="mb-12">
           <div className="inline-block relative mb-3">
             <span className="inline-block px-4 py-1 rounded-full text-xs font-medium tracking-wide" 
@@ -544,29 +531,25 @@ const ProductCategoryDetail = () => {
           </div>
           <h1 className="text-4xl font-medium mb-4">{categoryName}</h1>
           <p className="text-gray-600 max-w-3xl">
-            Browse our selection of high-quality {categoryName.toLowerCase()} designed for professional and industrial use.
-            Our premium products deliver exceptional performance and durability for your business needs.
+            Explore our range of high-quality {categoryName.toLowerCase()} engineered for industrial and professional applications, offering superior performance and reliability.
           </p>
         </div>
         
-        {/* Display main category info if viewing a subcategory */}
         {categoryType === 'sub' && breadcrumbInfo.mainName && (
           <div className="mb-8 p-4 bg-yellow-50 rounded-lg border border-yellow-100">
             <p className="text-sm text-gray-700">
               <span className="font-medium">{categoryName}</span> is part of our <a href={breadcrumbInfo.mainPath} className="text-yellow-600 hover:underline">{breadcrumbInfo.mainName}</a> product line.
-              {filteredProducts.length > 0 && ` We have ${filteredProducts.length} ${categoryName} products available.`}
+              {filteredProducts.length > 0 && ` Featuring ${filteredProducts.length} products in this category.`}
             </p>
           </div>
         )}
         
-        {/* Filters and sorting */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           <div className="text-sm text-gray-600">
             Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, filteredProducts.length)} of {filteredProducts.length} products
           </div>
           
           <div className="flex gap-4 items-center">
-            {/* View mode toggles */}
             <div className="flex border border-gray-200 rounded-md overflow-hidden">
               <button 
                 onClick={() => setViewMode('grid')}
@@ -588,7 +571,6 @@ const ProductCategoryDetail = () => {
               </button>
             </div>
             
-            {/* Sort dropdown */}
             <div className="relative">
               <select 
                 value={sortBy}
@@ -596,8 +578,6 @@ const ProductCategoryDetail = () => {
                 className="pl-3 pr-10 py-2 text-sm border border-gray-200 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-yellow-300 appearance-none"
               >
                 <option value="featured">Featured</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
                 <option value="name-asc">Name: A to Z</option>
                 <option value="name-desc">Name: Z to A</option>
               </select>
@@ -610,7 +590,6 @@ const ProductCategoryDetail = () => {
           </div>
         </div>
         
-        {/* Products Grid or List View */}
         {viewMode === 'grid' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
             {currentProducts.map((product) => (
@@ -627,7 +606,6 @@ const ProductCategoryDetail = () => {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     
-                    {/* Display both categories */}
                     <div className="absolute top-3 left-3 px-3 py-1 rounded text-xs font-medium" 
                          style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}>
                       {product.mainCategory}
@@ -639,44 +617,12 @@ const ProductCategoryDetail = () => {
                     
                     <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white py-2 px-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                       <div className="font-medium text-sm flex justify-between items-center">
-                        <span>View details</span>
+                        <span>View Specifications</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
                              strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                       </div>
-                    </div>
-                    
-                    {/* Quick action buttons that appear on hover */}
-                    <div className="absolute top-2 right-2 transition-opacity duration-300 opacity-0 group-hover:opacity-100 flex flex-col gap-2">
-                      <button 
-                        className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors"
-                        onClick={(e) => { e.stopPropagation(); alert('Added to wishlist!'); }}
-                        aria-label="Add to wishlist"
-                      >
-                        <svg className="w-4 h-4 text-gray-700" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                        </svg>
-                      </button>
-                      <button 
-                        className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors"
-                        onClick={(e) => { e.stopPropagation(); alert('Added to cart!'); }}
-                        aria-label="Add to cart"
-                      >
-                        <svg className="w-4 h-4 text-gray-700" viewBox="0 0 20 20" fill="currentColor">
-                          <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z" />
-                        </svg>
-                      </button>
-                      <button 
-                        className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors"
-                        onClick={(e) => { e.stopPropagation(); alert('Quick view coming soon!'); }}
-                        aria-label="Quick view"
-                      >
-                        <svg className="w-4 h-4 text-gray-700" viewBox="0 0 20 20" fill="currentColor">
-                          <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                          <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
-                        </svg>
-                      </button>
                     </div>
                   </div>
                   
@@ -685,19 +631,12 @@ const ProductCategoryDetail = () => {
                     <p className="text-sm text-gray-600 mb-2 line-clamp-2" title={product.description}>
                       {product.description}
                     </p>
-                    <div className="flex items-baseline">
-                      <span className="font-medium text-base">$ {product.price} USD</span>
-                      {product.comparePrice && (
-                        <span className="ml-2 text-gray-500 line-through text-xs">$ {product.comparePrice} USD</span>
-                      )}
-                    </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
         ) : (
-          // List view
           <div className="space-y-4 mb-12">
             {currentProducts.map((product) => (
               <div 
@@ -713,7 +652,6 @@ const ProductCategoryDetail = () => {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     
-                    {/* Display both main and sub categories */}
                     <div className="absolute top-3 left-3 px-3 py-1 rounded text-xs font-medium" 
                          style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}>
                       {product.mainCategory}
@@ -733,28 +671,13 @@ const ProductCategoryDetail = () => {
                     </p>
                   </div>
                   
-                  <div className="flex flex-wrap justify-between items-end">
-                    <div className="flex items-baseline">
-                      <span className="font-medium text-lg">$ {product.price} USD</span>
-                      {product.comparePrice && (
-                        <span className="ml-2 text-gray-500 line-through text-sm">$ {product.comparePrice} USD</span>
-                      )}
-                    </div>
-                    
-                    <div className="flex gap-2 mt-2 sm:mt-0">
-                      <button 
-                        className="px-3 py-1 rounded-md text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors"
-                        onClick={(e) => { e.stopPropagation(); alert('Added to cart!'); }}
-                      >
-                        Add to Cart
-                      </button>
-                      <button 
-                        className="px-3 py-1 rounded-md text-sm font-medium text-white transition-colors"
-                        style={{ backgroundColor: themeColors.dark }}
-                      >
-                        View Details
-                      </button>
-                    </div>
+                  <div className="flex gap-2 mt-2 sm:mt-0">
+                    <button 
+                      className="px-3 py-1 rounded-md text-sm font-medium bg-gray-900 text-white transition-colors hover:bg-yellow-400 hover:text-gray-900"
+                      onClick={(e) => { e.stopPropagation(); handleProductClick(product.id); }}
+                    >
+                      View Specifications
+                    </button>
                   </div>
                 </div>
               </div>
@@ -762,7 +685,6 @@ const ProductCategoryDetail = () => {
           </div>
         )}
         
-        {/* Pagination */}
         {filteredProducts.length > productsPerPage && (
           <div className="flex justify-center mt-10">
             <div className="flex flex-wrap space-x-2">
@@ -779,7 +701,6 @@ const ProductCategoryDetail = () => {
               </button>
               
               {[...Array(totalPages)].map((_, index) => {
-                // Show limited number of page buttons
                 if (
                   index === 0 || 
                   index === totalPages - 1 || 
@@ -800,7 +721,6 @@ const ProductCategoryDetail = () => {
                   );
                 }
                 
-                // Show ellipsis for skipped pages
                 if (index === 1 && currentPage > 3) {
                   return <span key="start-ellipsis" className="px-3 py-2">...</span>;
                 }
@@ -827,10 +747,8 @@ const ProductCategoryDetail = () => {
           </div>
         )}
         
-        {/* Category banner */}
         <div className="mt-16 mb-12 relative overflow-hidden rounded-xl">
           <div className="relative h-64 md:h-80">
-            {/* Banner background - using first product image as banner */}
             <div className="absolute inset-0">
               <img 
                 src={getProductImage(filteredProducts[0]?.id || 1)} 
@@ -848,14 +766,15 @@ const ProductCategoryDetail = () => {
                 }
               </h2>
               <p className="text-white/80 text-sm md:text-base mb-6">
-                Discover our professional-grade {categoryName.toLowerCase()} designed to exceed industry standards and maximize operational efficiency.
+                Discover our high-performance {categoryName.toLowerCase()} designed to meet the rigorous demands of industrial applications.
               </p>
               <div>
                 <button 
                   className="px-6 py-2 rounded-lg font-medium inline-flex items-center gap-2 transition-colors"
                   style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}
+                  onClick={() => navigate('/products')}
                 >
-                  Request Quote
+                  Explore Catalog
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                   </svg>
@@ -865,13 +784,11 @@ const ProductCategoryDetail = () => {
           </div>
         </div>
         
-        {/* Related Categories Section */}
         {relatedCategories.length > 0 && (
           <div className="pt-12 border-t border-gray-100">
-            <h2 className="text-2xl font-medium mb-6">You might also be interested in</h2>
+            <h2 className="text-2xl font-medium mb-6">Explore Related Categories</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
               {relatedCategories.map((category, index) => {
-                // Find first product with this category to use as thumbnail
                 const categoryProduct = categoryType === 'main' 
                   ? productsData.find(p => p.subCategory === category && p.mainCategory === categoryName)
                   : productsData.find(p => p.subCategory === category);

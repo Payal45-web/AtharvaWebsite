@@ -274,35 +274,39 @@ import img268 from '../assets/268.jpeg';
 import img269 from '../assets/269.jpg';
 import img270 from '../assets/270.jpeg';
 
+// [Image imports remain unchanged, omitted for brevity but included in original]
+
 // Create a complete image mapping object for all 270 products
 const imageMapping = {
-  1: img1, 2: img2, 3: img3, 4: img4, 5: img5, 6: img6, 7: img7, 8: img8, 9: img9, 10: img10,
-  11: img11, 12: img12, 13: img13, 14: img14, 15: img15, 16: img16, 17: img17, 18: img18, 19: img19, 20: img20,
-  21: img21, 22: img22, 23: img23, 24: img24, 25: img25, 26: img26, 27: img27, 28: img28, 29: img29, 30: img30,
-  31: img31, 32: img32, 33: img33, 34: img34, 35: img35, 36: img36, 37: img37, 38: img38, 39: img39, 40: img40,
-  41: img41, 42: img42, 43: img43, 44: img44, 45: img45, 46: img46, 47: img47, 48: img48, 49: img49, 50: img50,
-  51: img51, 52: img52, 53: img53, 54: img54, 55: img55, 56: img56, 57: img57, 58: img58, 59: img59, 60: img60,
-  61: img61, 62: img62, 63: img63, 64: img64, 65: img65, 66: img66, 67: img67, 68: img68, 69: img69, 70: img70,
-  71: img71, 72: img72, 73: img73, 74: img74, 75: img75, 76: img76, 77: img77, 78: img78, 79: img79, 80: img80,
-  81: img81, 82: img82, 83: img83, 84: img84, 85: img85, 86: img86, 87: img87, 88: img88, 89: img89, 90: img90,
-  91: img91, 92: img92, 93: img93, 94: img94, 95: img95, 96: img96, 97: img97, 98: img98, 99: img99, 100: img100,
-  101: img101, 102: img102, 103: img103, 104: img104, 105: img105, 106: img106, 107: img107, 108: img108, 109: img109, 110: img110,
-  111: img111, 112: img112, 113: img113, 114: img114, 115: img115, 116: img116, 117: img117, 118: img118, 119: img119, 120: img120,
-  121: img121, 122: img122, 123: img123, 124: img124, 125: img125, 126: img126, 127: img127, 128: img128, 129: img129, 130: img130,
-  131: img131, 132: img132, 133: img133, 134: img134, 135: img135, 136: img136, 137: img137, 138: img138, 139: img139, 140: img140,
-  141: img141, 142: img142, 143: img143, 144: img144, 145: img145, 146: img146, 147: img147, 148: img148, 149: img149, 150: img150,
-  151: img151, 152: img152, 153: img153, 154: img154, 155: img155, 156: img156, 157: img157, 158: img158, 159: img159, 160: img160,
-  161: img161, 162: img162, 163: img163, 164: img164, 165: img165, 166: img166, 167: img167, 168: img168, 169: img169, 170: img170,
-  171: img171, 172: img172, 173: img173, 174: img174, 175: img175, 176: img176, 177: img177, 178: img178, 179: img179, 180: img180,
-  181: img181, 182: img182, 183: img183, 184: img184, 185: img185, 186: img186, 187: img187, 188: img188, 189: img189, 190: img190,
-  191: img191, 192: img192, 193: img193, 194: img194, 195: img195, 196: img196, 197: img197, 198: img198, 199: img199, 200: img200,
-  201: img201, 202: img202, 203: img203, 204: img204, 205: img205, 206: img206, 207: img207, 208: img208, 209: img209, 210: img210,
-  211: img211, 212: img212, 213: img213, 214: img214, 215: img215, 216: img216, 217: img217, 218: img218, 219: img219, 220: img220,
-  221: img221, 222: img222, 223: img223, 224: img224, 225: img225, 226: img226, 227: img227, 228: img228, 229: img229, 230: img230,
-  231: img231, 232: img232, 233: img233, 234: img234, 235: img235, 236: img236, 237: img237, 238: img238, 239: img239, 240: img240,
-  241: img241, 242: img242, 243: img243, 244: img244, 245: img245, 246: img246, 247: img247, 248: img248, 249: img249, 250: img250,
-  251: img251, 252: img252, 253: img253, 254: img254, 255: img255, 256: img256, 257: img257, 258: img258, 259: img259, 260: img260,
-  261: img261, 262: img262, 263: img263, 264: img264, 265: img265, 266: img266, 267: img267, 268: img268, 269: img269, 270: img270
+  // [Image mapping remains unchanged, omitted for brevity but included in original]
+   1: img1, 2: img2, 3: img3, 4: img4, 5: img5, 6: img6, 7: img7, 8: img8, 9: img9, 10: img10,
+    11: img11, 12: img12, 13: img13, 14: img14, 15: img15, 16: img16, 17: img17, 18: img18, 19: img19, 20: img20,
+    21: img21, 22: img22, 23: img23, 24: img24, 25: img25, 26: img26, 27: img27, 28: img28, 29: img29, 30: img30,
+    31: img31, 32: img32, 33: img33, 34: img34, 35: img35, 36: img36, 37: img37, 38: img38, 39: img39, 40: img40,
+    41: img41, 42: img42, 43: img43, 44: img44, 45: img45, 46: img46, 47: img47, 48: img48, 49: img49, 50: img50,
+    51: img51, 52: img52, 53: img53, 54: img54, 55: img55, 56: img56, 57: img57, 58: img58, 59: img59, 60: img60,
+    61: img61, 62: img62, 63: img63, 64: img64, 65: img65, 66: img66, 67: img67, 68: img68, 69: img69, 70: img70,
+    71: img71, 72: img72, 73: img73, 74: img74, 75: img75, 76: img76, 77: img77, 78: img78, 79: img79, 80: img80,
+    81: img81, 82: img82, 83: img83, 84: img84, 85: img85, 86: img86, 87: img87, 88: img88, 89: img89, 90: img90,
+    91: img91, 92: img92, 93: img93, 94: img94, 95: img95, 96: img96, 97: img97, 98: img98, 99: img99, 100: img100,
+    101: img101, 102: img102, 103: img103, 104: img104, 105: img105, 106: img106, 107: img107, 108: img108, 109: img109, 110: img110,
+    111: img111, 112: img112, 113: img113, 114: img114, 115: img115, 116: img116, 117: img117, 118: img118, 119: img119, 120: img120,
+    121: img121, 122: img122, 123: img123, 124: img124, 125: img125, 126: img126, 127: img127, 128: img128, 129: img129, 130: img130,
+    131: img131, 132: img132, 133: img133, 134: img134, 135: img135, 136: img136, 137: img137, 138: img138, 139: img139, 140: img140,
+    141: img141, 142: img142, 143: img143, 144: img144, 145: img145, 146: img146, 147: img147, 148: img148, 149: img149, 150: img150,
+    151: img151, 152: img152, 153: img153, 154: img154, 155: img155, 156: img156, 157: img157, 158: img158, 159: img159, 160: img160,
+    161: img161, 162: img162, 163: img163, 164: img164, 165: img165, 166: img166, 167: img167, 168: img168, 169: img169, 170: img170,
+    171: img171, 172: img172, 173: img173, 174: img174, 175: img175, 176: img176, 177: img177, 178: img178, 179: img179, 180: img180,
+    181: img181, 182: img182, 183: img183, 184: img184, 185: img185, 186: img186, 187: img187, 188: img188, 189: img189, 190: img190,
+    191: img191, 192: img192, 193: img193, 194: img194, 195: img195, 196: img196, 197: img197, 198: img198, 199: img199, 200: img200,
+    201: img201, 202: img202, 203: img203, 204: img204, 205: img205, 206: img206, 207: img207, 208: img208, 209: img209, 210: img210,
+    211: img211, 212: img212, 213: img213, 214: img214, 215: img215, 216: img216, 217: img217, 218: img218, 219: img219, 220: img220,
+    221: img221, 222: img222, 223: img223, 224: img224, 225: img225, 226: img226, 227: img227, 228: img228, 229: img229, 230: img230,
+    231: img231, 232: img232, 233: img233, 234: img234, 235: img235, 236: img236, 237: img237, 238: img238, 239: img239, 240: img240,
+    241: img241, 242: img242, 243: img243, 244: img244, 245: img245, 246: img246, 247: img247, 248: img248, 249: img249, 250: img250,
+    251: img251, 252: img252, 253: img253, 254: img254, 255: img255, 256: img256, 257: img257, 258: img258, 259: img259, 260: img260,
+    261: img261, 262: img262, 263: img263, 264: img264, 265: img265, 266: img266, 267: img267, 268: img268, 269: img269, 270: img270
+  
 };
 
 // Helper function to get image based on product ID
@@ -315,12 +319,46 @@ const categoryToSlug = (category) => {
   return category.toLowerCase().replace(/\s+/g, '-');
 };
 
-// Theme colors to match hero section
+// Theme colors for a professional catalog look
 const themeColors = {
-  primary: '#FBBF24', // Yellow-400
-  secondary: '#FEF3C7', // Yellow-100
-  accent: '#F59E0B', // Yellow-500
-  dark: '#111827' // Gray-900
+  primary: '#1E3A8A',
+  secondary: '#E5E7EB',
+  accent: '#3B82F6',
+  dark: '#111827'
+};
+
+// Define sample add-ons based on product subcategory (customizable per product)
+const getAddOns = (subCategory) => {
+  const addOnMap = {
+    'Vacuum Cleaner': ['Extra Filter', 'Extended Hose'],
+    'Scrubber Dryers': ['Extra Brush', 'Detergent Pack'],
+    'Sweepers': ['Side Brush', 'Filter Kit'],
+    'High-Pressure Washers': ['Nozzle Set', 'Pressure Hose'],
+    'Robotic Floorcare': ['Navigation Upgrade', 'Battery Pack'],
+    'Material Handling Systems': ['Load Sensor', 'Safety Harness'],
+    'Air Balancers': ['Air Regulator', 'Extended Chain'],
+    'Assembly Tools': ['Tool Case', 'Spare Bits'],
+    'Cordless Precision Fastening': ['Extra Battery', 'Charger'],
+    'Torque Wrench': ['Calibration Kit', 'Torque Extension'],
+    'Lubrication Equipment': ['Oil Filter', 'Grease Cartridge'],
+    'Leatherworking Tools': ['Leather Dye', 'Stitching Thread'],
+    'Measurement Tools': ['Calibration Block', 'Case'],
+    'Pneumatic Tools': ['Air Filter', 'Hose Extension'],
+    'Single Discs & Burnishers': ['Pad Set', 'Polishing Compound'],
+    'Industrial Vacuum Cleaners': ['HEPA Filter', 'Dust Bag'],
+    'Industrial Vacuum Solutions': ['Cyclone Attachment', 'Wet Kit'],
+    'Hydraulic Torque Wrenches': ['Hydraulic Oil', 'Seal Kit'],
+    'Air Chain Hoist': ['Chain Extension', 'Safety Lock'],
+    'Ergonomic Handling Systems': ['Rail Extension', 'Trolley Kit'],
+    'Process Communication Module': ['Software Upgrade', 'Cable Set'],
+    'Air Impactools': ['Impact Socket', 'Air Tool Oil'],
+    'Air Die Grinders': ['Grinding Wheel', 'Collet Set'],
+    'Air Wheel Grinders and Cutting Tools': ['Cutting Disc', 'Guard'],
+    'Air Ratchet Wrenches': ['Ratchet Head', 'Air Line'],
+    'Air Hammers': ['Chisel Set', 'Retainer'],
+    'Air Filters, Regulators & Lubricators': ['Filter Element', 'Lubricant'],
+  };
+  return addOnMap[subCategory] || ['Custom Option 1', 'Custom Option 2']; // Default add-ons if subcategory not mapped
 };
 
 const ProductDetail = () => {
@@ -329,69 +367,66 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeImageIndex, setActiveImageIndex] = useState(0); // For image gallery
-  
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [selectedAddOn, setSelectedAddOn] = useState(null);
+
   useEffect(() => {
     const productId = parseInt(productSlug, 10);
-    
+
     if (isNaN(productId)) {
-      // Handle invalid product ID
       setIsLoading(false);
+      navigate('/products');
       return;
     }
-    
+
     const foundProduct = productsData.find(p => p.id === productId);
-    
+
     if (foundProduct) {
       setProduct(foundProduct);
-      
-      // Find related products (same subcategory, excluding current product)
+
       const sameSubcategory = productsData
         .filter(p => p.subCategory === foundProduct.subCategory && p.id !== foundProduct.id)
-        .slice(0, 2); // Limit to 2 from same subcategory
-      
-      // Find products from same main category but different subcategory
+        .slice(0, 2);
+
       const sameMainDifferentSub = productsData
         .filter(p => 
           p.mainCategory === foundProduct.mainCategory && 
           p.subCategory !== foundProduct.subCategory && 
           p.id !== foundProduct.id
         )
-        .slice(0, 2); // Limit to 2 from same main category but different subcategory
-      
-      // Combine the related products
+        .slice(0, 2);
+
       setRelatedProducts([...sameSubcategory, ...sameMainDifferentSub]);
+    } else {
+      setIsLoading(false);
+      navigate('/products');
     }
-    
-    setIsLoading(false);
-  }, [productSlug]);
-  
-  // Handle category clicks
+  }, [productSlug, navigate]);
+
   const handleMainCategoryClick = (mainCategory) => {
     const categorySlug = categoryToSlug(mainCategory);
     navigate(`/category/main/${categorySlug}`);
   };
-  
+
   const handleSubCategoryClick = (subCategory) => {
     const categorySlug = categoryToSlug(subCategory);
     navigate(`/category/sub/${categorySlug}`);
   };
 
-  // Create mock gallery images (in real app, these would come from product data)
   const getGalleryImages = (productId) => {
-    // In a real app, you'd have multiple images per product
-    // For this example, we'll just use the same image 4 times
-    return [0, 1, 2, 3].map(() => getProductImage(productId));
+    const baseImage = getProductImage(productId);
+    return [baseImage, getProductImage(productId + 1) || baseImage, getProductImage(productId + 2) || baseImage, getProductImage(productId + 3) || baseImage]
+      .filter(img => img);
   };
-  
+
   if (isLoading) {
     return (
       <div className="container max-w-6xl mx-auto px-4 py-24 flex justify-center items-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-900"></div>
       </div>
     );
   }
-  
+
   if (!product) {
     return (
       <div className="container max-w-6xl mx-auto px-4 py-24"
@@ -405,7 +440,7 @@ const ProductDetail = () => {
           <p className="text-gray-600 mb-8">We couldn't find the product you're looking for.</p>
           <button 
             onClick={() => navigate('/products')}
-            className="px-6 py-3 rounded-full font-medium text-gray-900 transition-colors"
+            className="px-6 py-3 rounded-full font-medium text-white transition-colors"
             style={{ backgroundColor: themeColors.primary }}
           >
             Browse All Products
@@ -415,9 +450,9 @@ const ProductDetail = () => {
     );
   }
 
-  // Get gallery images for the current product
   const galleryImages = getGalleryImages(product.id);
-  
+  const availableAddOns = getAddOns(product.subCategory);
+
   return (
     <div className="relative overflow-hidden min-h-screen" 
          style={{
@@ -425,26 +460,24 @@ const ProductDetail = () => {
                        radial-gradient(circle at 10% 90%, ${themeColors.secondary}40, transparent 30%),
                        white`
          }}>
-      {/* Decorative background elements */}
       <div className="absolute top-20 right-20 w-64 h-64 rounded-full opacity-10" 
            style={{ backgroundColor: themeColors.primary }}></div>
       <div className="absolute bottom-20 left-20 w-48 h-48 rounded-full opacity-10" 
            style={{ backgroundColor: themeColors.accent }}></div>
-      
+
       <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
-        {/* Breadcrumb with both main category and subcategory */}
         <div className="mb-8">
           <nav className="flex" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-3">
               <li className="inline-flex items-center">
-                <a href="/" className="text-sm text-gray-500 hover:text-yellow-400">Home</a>
+                <a href="/" className="text-sm text-gray-500 hover:text-blue-500">Home</a>
               </li>
               <li>
                 <div className="flex items-center">
                   <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                   </svg>
-                  <a href="/products" className="text-sm text-gray-500 hover:text-yellow-400 ml-1 md:ml-2">Products</a>
+                  <a href="/products" className="text-sm text-gray-500 hover:text-blue-500 ml-1 md:ml-2">Products</a>
                 </div>
               </li>
               <li>
@@ -454,7 +487,7 @@ const ProductDetail = () => {
                   </svg>
                   <button 
                     onClick={() => handleMainCategoryClick(product.mainCategory)}
-                    className="text-sm text-gray-500 hover:text-yellow-400 ml-1 md:ml-2"
+                    className="text-sm text-gray-500 hover:text-blue-500 ml-1 md:ml-2"
                   >
                     {product.mainCategory}
                   </button>
@@ -467,7 +500,7 @@ const ProductDetail = () => {
                   </svg>
                   <button 
                     onClick={() => handleSubCategoryClick(product.subCategory)}
-                    className="text-sm text-gray-500 hover:text-yellow-400 ml-1 md:ml-2"
+                    className="text-sm text-gray-500 hover:text-blue-500 ml-1 md:ml-2"
                   >
                     {product.subCategory}
                   </button>
@@ -484,12 +517,9 @@ const ProductDetail = () => {
             </ol>
           </nav>
         </div>
-        
-        {/* Product Detail */}
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {/* Product Images Gallery */}
           <div className="space-y-4">
-            {/* Main image */}
             <div className="bg-white rounded-xl overflow-hidden shadow-md">
               <div className="aspect-square relative overflow-hidden">
                 <img 
@@ -497,26 +527,17 @@ const ProductDetail = () => {
                   alt={product.name} 
                   className="w-full h-full object-cover transition-all duration-500"
                 />
-                
-                {/* Main category label */}
                 <div 
                   className="absolute top-4 left-4 px-3 py-1 rounded text-xs font-medium"
-                  style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}
+                  style={{ backgroundColor: themeColors.primary, color: 'white' }}
                 >
                   {product.mainCategory}
                 </div>
-                
-                {/* Subcategory label */}
                 <div className="absolute top-10 left-4 px-3 py-1 rounded text-xs font-medium bg-white/80 text-gray-700">
                   {product.subCategory}
                 </div>
-                
-                {/* Image zoom on hover effect */}
-                <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-10 transition-opacity duration-300"></div>
               </div>
             </div>
-            
-            {/* Thumbnail gallery */}
             <div className="grid grid-cols-4 gap-2">
               {galleryImages.map((img, index) => (
                 <button 
@@ -524,8 +545,8 @@ const ProductDetail = () => {
                   onClick={() => setActiveImageIndex(index)}
                   className={`aspect-square rounded-md overflow-hidden transition-all duration-300 ${
                     activeImageIndex === index 
-                      ? 'ring-2 ring-yellow-400' 
-                      : 'ring-1 ring-gray-200 hover:ring-yellow-200'
+                      ? 'ring-2 ring-blue-500' 
+                      : 'ring-1 ring-gray-200 hover:ring-blue-300'
                   }`}
                 >
                   <img 
@@ -537,32 +558,20 @@ const ProductDetail = () => {
               ))}
             </div>
           </div>
-          
-          {/* Product Info */}
           <div className="flex flex-col">
             <div className="mb-6">
               <h1 className="text-3xl font-medium mb-2">{product.name}</h1>
-              
-              <div className="flex items-baseline mb-4">
-                <span className="text-2xl font-medium">$ {product.price} USD</span>
-                {product.comparePrice && (
-                  <span className="ml-2 text-gray-500 line-through text-base">$ {product.comparePrice} USD</span>
-                )}
-              </div>
-              
-              {/* Categories info row */}
               <div className="flex flex-wrap gap-3 mb-4">
                 <button 
                   onClick={() => handleMainCategoryClick(product.mainCategory)}
-                  className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full hover:bg-yellow-400 hover:text-gray-900 transition-colors"
+                  className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full hover:bg-blue-100 hover:text-blue-900 transition-colors"
                   style={{ backgroundColor: themeColors.secondary, color: themeColors.accent }}
                 >
                   <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.293 1.293a1 1 0 011.414 0L10 9.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    <path fillRule="evenodd" d="M2 3a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V3zm3.293 2.293a1 1 0 011.414 0L10 8.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
                   {product.mainCategory}
                 </button>
-                
                 <button 
                   onClick={() => handleSubCategoryClick(product.subCategory)}
                   className="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors"
@@ -573,177 +582,124 @@ const ProductDetail = () => {
                   {product.subCategory}
                 </button>
               </div>
-              
-              {/* Product badges */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                <span className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full"
-                      style={{ backgroundColor: themeColors.secondary, color: themeColors.accent }}>
-                  <svg className="w-3 h-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  Premium Quality
-                </span>
-                <span className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full"
-                      style={{ backgroundColor: themeColors.secondary, color: themeColors.accent }}>
-                  <svg className="w-3 h-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
-                    <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1v-5h2v5a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H19a1 1 0 001-1V9a3 3 0 00-3-3h-3V4a1 1 0 00-1-1H3z" />
-                  </svg>
-                  Fast Shipping
-                </span>
-                <span className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-full"
-                      style={{ backgroundColor: themeColors.secondary, color: themeColors.accent }}>
-                  <svg className="w-3 h-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
-                  Technical Support
-                </span>
-              </div>
             </div>
-            
-            <div className="bg-gray-50 p-4 rounded-lg mb-6">
-              <h2 className="font-medium mb-2">Description</h2>
+            <div className="bg-gray-50 p-6 rounded-xl mb-6">
+              <h3 className="font-semibold text-lg mb-2">Description</h3>
               <p className="text-gray-700">{product.description}</p>
             </div>
-            
             {product.specification && (
-              <div className="p-4 border border-gray-100 rounded-lg mb-6">
-                <h2 className="font-medium mb-2">Specifications</h2>
-                <p className="text-gray-700">{product.specification}</p>
+              <div className="p-6 border border-gray-100 bg-white rounded-xl shadow-sm mb-6">
+                <h3 className="font-semibold text-lg mb-3">Specifications</h3>
+                <p className="text-gray-600">{product.specification}</p>
               </div>
             )}
-            
-            {/* Feature list */}
             <div className="mb-6">
-              <h2 className="font-medium mb-3">Key Features</h2>
+              <h3 className="font-semibold text-lg mb-3">Key Features</h3>
               <ul className="space-y-2">
                 <li className="flex items-start">
-                  <svg className="w-5 h-5 mr-2 text-yellow-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  <svg className="w-5 h-5 mr-2 text-blue-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 2 0 100-16 8 2 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 0 00-1.414 1.414l2 2a1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span>Professional-grade construction for durability</span>
                 </li>
                 <li className="flex items-start">
-                  <svg className="w-5 h-5 mr-2 text-yellow-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  <svg className="w-5 h-5 mr-2 text-blue-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 2 0 100-16 44 0 000 0zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 0 00-1.414 1.414l2 2a1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span>Energy-efficient operation reduces costs</span>
+                  <span>Energy-efficient operation</span>
                 </li>
                 <li className="flex items-start">
-                  <svg className="w-5 h-5 mr-2 text-yellow-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  <svg className="w-5 h-5 mr-2 text-blue-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 2 0 100-16 44 2 0 000 0zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 0 00-1.414 1.414l2 2a1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span>Easy maintenance design for long service life</span>
+                  <span>Designed for easy maintenance</span>
                 </li>
                 <li className="flex items-start">
-                  <svg className="w-5 h-5 mr-2 text-yellow-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  <svg className="w-5 h-5 mr-2 text-blue-500 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 2 0 100-16 44 2 0 000 0zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 0 00-1.414 1.414l2 2a1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
                   <span>Compliant with international safety standards</span>
                 </li>
               </ul>
             </div>
-            
-            <div className="mt-auto space-y-3">
-              <button className="w-full py-3 rounded-lg text-white font-medium transition-all duration-300 flex items-center justify-center"
-                      style={{ backgroundColor: themeColors.dark }}>
-                <svg className="w-5 h-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
-                </svg>
-                Add to Cart
-              </button>
-              <button className="w-full py-3 rounded-lg font-medium transition-all duration-300"
-                      style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}>
-                Request Quote
-              </button>
-              <button className="w-full py-3 bg-gray-100 text-gray-900 font-medium rounded-lg hover:bg-gray-200 transition-colors flex items-center justify-center">
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                Download Datasheet
-              </button>
+            <div className="p-6 border border-gray-100 bg-white rounded-xl shadow-sm mb-6">
+              <h3 className="font-semibold text-lg mb-3">Customize Your Product</h3>
+              <p className="text-gray-600 mb-4">Select one optional add-on (only one selection allowed):</p>
+              {availableAddOns.length > 0 ? (
+                <div className="space-y-2">
+                  {availableAddOns.map((addOn, index) => (
+                    <label key={index} className="flex items-center space-x-2">
+                      <input
+                        type="radio"
+                        name="addOn"
+                        value={addOn}
+                        checked={selectedAddOn === addOn}
+                        onChange={(e) => setSelectedAddOn(e.target.value)}
+                        className="form-radio text-blue-500 focus:ring-blue-500"
+                      />
+                      <span className="text-gray-700">{addOn}</span>
+                    </label>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-500">No add-ons available for this product.</p>
+              )}
+              {selectedAddOn && (
+                <p className="mt-2 text-green-600 font-medium">Selected Add-On: {selectedAddOn}</p>
+              )}
             </div>
           </div>
         </div>
-        
-        {/* Related Products - showing both main and subcategory relationships */}
+
         {relatedProducts.length > 0 && (
-          <div className="border-t border-gray-100 pt-12">
-            <h2 className="text-2xl font-medium mb-6">Related Products</h2>
+          <div className="border-t border-gray-100 pt-8">
+            <h2 className="text-2xl font-semibold mb-6">Related Products</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
               {relatedProducts.map((relatedProduct) => (
                 <div 
                   key={relatedProduct.id} 
-                  className="group cursor-pointer bg-white rounded-xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md"
+                  className="group cursor-pointer bg-white rounded-lg overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md"
                   onClick={() => navigate(`/product/${relatedProduct.id}`)}
                 >
                   <div className="aspect-[4/3] relative overflow-hidden">
                     <img 
                       src={getProductImage(relatedProduct.id)} 
                       alt={relatedProduct.name} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-500"
                     />
-                    
-                    {/* Show both main and sub category badges */}
-                    <div className="absolute top-3 left-3 px-3 py-1 rounded text-xs font-medium" 
-                         style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}>
+                    <div className="absolute top-2 left-2 px-3 py-1 rounded text-xs font-semibold" 
+                         style={{ backgroundColor: themeColors.primary, color: 'white' }}>
                       {relatedProduct.mainCategory}
                     </div>
-                    
-                    <div className="absolute top-9 left-3 px-3 py-1 rounded text-xs font-medium bg-white/80 text-gray-700">
+                    <div className="absolute top-8 left-2 px-3 py-1 rounded text-xs font-medium bg-white/80 text-gray-700">
                       {relatedProduct.subCategory}
                     </div>
-                    
-                    {/* Add relationship badge */}
-                    <div className="absolute top-3 right-3 px-2 py-1 rounded text-xs bg-gray-900 text-white">
-                      {relatedProduct.subCategory === product.subCategory ? 
-                        'Same Type' : 'Related'
-                      }
-                    </div>
-                    
-                    <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white py-2 px-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <div className="font-medium text-sm flex justify-between items-center">
-                        <span>View product</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                      </div>
-                    </div>
                   </div>
-                  
                   <div className="p-4">
-                    <h3 className="font-medium text-base mb-1 truncate">{relatedProduct.name}</h3>
-                    <div className="flex items-baseline">
-                      <span className="font-medium text-base">$ {relatedProduct.price} USD</span>
-                      {relatedProduct.comparePrice && (
-                        <span className="ml-2 text-gray-500 line-through text-xs">$ {relatedProduct.comparePrice} USD</span>
-                      )}
-                    </div>
+                    <h3 className="font-semibold text-base mb-1 truncate">{relatedProduct.name}</h3>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         )}
-        
-        {/* Browse category banner */}
-        <div className="mt-16 mb-12 p-6 bg-gray-50 rounded-xl border border-gray-100">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+
+        <div className="mt-16 mb-8 p-6 bg-gray-50 rounded-xl border border-gray-100">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div>
-              <h3 className="text-xl font-medium mb-2">Browse More {product.mainCategory} Products</h3>
-              <p className="text-gray-600">Discover our complete range of {product.mainCategory.toLowerCase()} options.</p>
+              <h3 className="text-xl font-semibold mb-2">Explore More {product.mainCategory} Products</h3>
+              <p className="text-gray-600">Discover our complete range of {product.mainCategory.toLowerCase()} solutions.</p>
             </div>
             <div className="flex gap-3">
               <button 
                 onClick={() => handleMainCategoryClick(product.mainCategory)}
-                className="px-4 py-2 rounded-md font-medium bg-gray-900 text-white hover:bg-yellow-400 hover:text-gray-900 transition-colors"
+                className="px-4 py-2 rounded-md font-semibold text-white bg-gray-900 hover:bg-gray-800 transition-colors"
               >
                 All {product.mainCategory}
               </button>
               <button 
                 onClick={() => handleSubCategoryClick(product.subCategory)}
-                className="px-4 py-2 rounded-md font-medium border border-gray-300 hover:bg-gray-100 transition-colors"
+                className="px-4 py-2 rounded-md font-semibold text-gray-700 border border-gray-300 hover:bg-gray-100 transition-colors"
               >
                 {product.subCategory}
               </button>

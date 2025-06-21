@@ -310,243 +310,200 @@ const getProductImage = (productId) => {
   return imageMap[productId] || img1; // Fallback to first image if ID not found
 };
 
-// Theme colors to match styling
+// Theme colors for professional brochure look
 const themeColors = {
-  primary: '#FBBF24', // Yellow-400
-  secondary: '#FEF3C7', // Yellow-100
-  accent: '#F59E0B', // Yellow-500
+  primary: '#1E3A8A', // Blue-800 for professional tone
+  secondary: '#93C5FD', // Blue-300 for accents
+  accent: '#1D4ED8', // Blue-700 for highlights
   dark: '#111827' // Gray-900
 };
 
-// Convert category name to URL slug
-const categoryToSlug = (category) => {
-  return category.toLowerCase().replace(/\s+/g, '-');
+// Brand-specific redirect URLs
+const brandRedirects = {
+  Nilfisk: 'https://www.nilfisk.com/global',
+  'Ingersoll Rand': 'https://powertools.ingersollrand.com',
+  'AROzone.com': 'https://www.arozone.com',
+  'Tristar Bolting': 'https://tristarbolting.com', // Assumed URL
+  'SP Air Tools': 'https://www.spairtools.com' // Assumed URL
+};
+
+// Get brand-specific category based on product name or brand
+const getBrandCategory = (product) => {
+  const brand = product.brand || product.mainCategory;
+  switch (brand) {
+    case 'Nilfisk':
+      return 'Pressure Washers & Accessories';
+    case 'Ingersoll Rand':
+      return 'Power Tools, Lifting Solutions, Pumps';
+    case 'AROzone.com':
+      return 'Pumps';
+    case 'Tristar Bolting':
+      return 'Hydraulic Torque Tools & Sockets';
+    case 'SP Air Tools':
+      return 'Tool Products';
+    default:
+      return 'General Products';
+  }
 };
 
 const Products = () => {
-  // State for filters, sorting, pagination, etc.
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState('featured');
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
+  const [viewMode, setViewMode] = useState('grid');
   const [filters, setFilters] = useState({
-    mainCategory: [],
-    subCategory: [],
+    brand: [],
+    category: [],
     priceRange: { min: 0, max: 100000 }
   });
   const [activeFilters, setActiveFilters] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    requirements: ''
+  });
   const productsPerPage = 6;
 
-  // Get unique categories for filters
   const categories = useMemo(() => {
-    const mainCats = [...new Set(productsData.map(product => product.mainCategory))].sort();
-    const subCats = [...new Set(productsData.map(product => product.subCategory))].sort();
-    
-    return { mainCategories: mainCats, subCategories: subCats };
-  }, []);
-  
-  // Calculate price range from products
-  const priceRange = useMemo(() => {
-    const prices = productsData.map(product => parseFloat(product.price));
-    return {
-      min: Math.min(...prices),
-      max: Math.max(...prices)
-    };
+    const brands = [...new Set(productsData.map(product => product.brand || product.mainCategory))].sort();
+    return { brands };
   }, []);
 
-  // Apply filters and sorting to products
+  const priceRange = useMemo(() => {
+    const prices = productsData.map(product => parseFloat(product.price));
+    return { min: Math.min(...prices), max: Math.max(...prices) };
+  }, []);
+
   const filteredProducts = useMemo(() => {
     return productsData.filter(product => {
-      // Apply main category filter if any selected
-      if (filters.mainCategory.length > 0 && !filters.mainCategory.includes(product.mainCategory)) {
-        return false;
-      }
-      
-      // Apply sub category filter if any selected
-      if (filters.subCategory.length > 0 && !filters.subCategory.includes(product.subCategory)) {
-        return false;
-      }
-      
-      // Apply price range filter
+      const brandMatch = filters.brand.length === 0 || filters.brand.includes(product.brand || product.mainCategory);
       const price = parseFloat(product.price);
-      return price >= filters.priceRange.min && price <= filters.priceRange.max;
+      return brandMatch && price >= filters.priceRange.min && price <= filters.priceRange.max;
     });
   }, [filters]);
-  
-  // Sort filtered products
+
   const sortedProducts = useMemo(() => {
     let sorted = [...filteredProducts];
-    
     switch (sortBy) {
       case 'price-low':
         return sorted.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
       case 'price-high':
-        return sorted.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+        return sorted.sort((a, b) => parseFloat(b.price) - parseFloat(b.price));
       case 'name-asc':
         return sorted.sort((a, b) => a.name.localeCompare(b.name));
       case 'name-desc':
         return sorted.sort((a, b) => b.name.localeCompare(a.name));
       case 'featured':
       default:
-        return sorted; // Assume products are already sorted by featured status in the data
+        return sorted;
     }
   }, [filteredProducts, sortBy]);
-  
-  // Calculate pagination
+
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
   const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
 
-  // Handle page changes
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const nextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
   const prevPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
-  
-  // Reset to page 1 when filters or sort option changes
+
   useEffect(() => {
     setCurrentPage(1);
   }, [filters, sortBy]);
-  
-  // Toggle filter for a category
-  const toggleCategoryFilter = (type, category) => {
+
+  const toggleBrandFilter = (brand) => {
     setFilters(prev => {
-      const current = [...prev[type]];
-      const index = current.indexOf(category);
-      
-      if (index === -1) {
-        current.push(category);
-      } else {
-        current.splice(index, 1);
-      }
-      
-      return { ...prev, [type]: current };
+      const current = [...prev.brand];
+      const index = current.indexOf(brand);
+      if (index === -1) current.push(brand);
+      else current.splice(index, 1);
+      return { ...prev, brand: current };
     });
   };
-  
-  // Update price range filter
+
   const updatePriceRange = (min, max) => {
-    setFilters(prev => ({
-      ...prev,
-      priceRange: { min, max }
-    }));
+    setFilters(prev => ({ ...prev, priceRange: { min, max } }));
   };
-  
-  // Clear all filters
+
   const clearFilters = () => {
     setFilters({
-      mainCategory: [],
-      subCategory: [],
+      brand: [],
+      category: [],
       priceRange: { min: priceRange.min, max: priceRange.max }
     });
   };
-  
-  // Toggle mobile filters
+
   const toggleFilters = () => {
     setActiveFilters(!activeFilters);
   };
 
-  return (
-    <div className="min-h-screen relative overflow-hidden"
-         style={{
-             background: `radial-gradient(circle at 90% 10%, ${themeColors.secondary}40, transparent 30%),
-                         radial-gradient(circle at 10% 90%, ${themeColors.secondary}40, transparent 30%),
-                         white`
-         }}>
-      {/* Decorative background elements */}
-      <div className="absolute top-20 right-20 w-64 h-64 rounded-full opacity-10" 
-           style={{ backgroundColor: themeColors.primary }}></div>
-      <div className="absolute bottom-20 left-20 w-48 h-48 rounded-full opacity-10" 
-           style={{ backgroundColor: themeColors.accent }}></div>
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
-        {/* Breadcrumb */}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Simulate sending to admin email (replace with actual backend API call)
+    console.log('Form submitted:', formData);
+    alert('Thank you! Your request has been sent to our team.');
+    // Reset form
+    setFormData({ name: '', email: '', phone: '', company: '', requirements: '' });
+    // For real implementation, use fetch or axios to POST to a backend endpoint
+    // Example: fetch('/api/submit-form', { method: 'POST', body: JSON.stringify(formData), headers: { 'Content-Type': 'application/json' } })
+    // .then(response => response.json())
+    // .then(data => alert('Submission successful'))
+    // .catch(error => alert('Error submitting form'));
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50"
+         style={{ background: `radial-gradient(circle at 90% 10%, ${themeColors.secondary}20, transparent 30%),
+                  radial-gradient(circle at 10% 90%, ${themeColors.secondary}20, transparent 30%)` }}>
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
           <nav className="flex" aria-label="Breadcrumb">
-            <ol className="inline-flex items-center space-x-1 md:space-x-3">
-              <li className="inline-flex items-center">
-                <Link to="/" className="text-sm text-gray-500 hover:text-yellow-400">Home</Link>
-              </li>
-              <li aria-current="page">
-                <div className="flex items-center">
-                  <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span className="text-sm text-gray-700 ml-1 md:ml-2">Products</span>
-                </div>
-              </li>
+            <ol className="inline-flex items-center space-x-2 text-gray-600">
+              <li><Link to="/" className="hover:text-blue-700">Home</Link></li>
+              <li><span className="mx-2">/</span></li>
+              <li><span className="text-blue-700">Catalog</span></li>
             </ol>
           </nav>
         </div>
 
-        {/* Page Header */}
-        <div className="mb-12">
-          <h1 className="text-4xl font-medium mb-4">Our Products</h1>
-          <p className="text-gray-600 max-w-3xl">
-            Browse our complete range of high-quality products designed for professional and industrial use.
-            Our premium solutions deliver exceptional performance and durability for your business needs.
-          </p>
+        <div className="mb-10">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Product Catalog</h1>
+          <p className="text-gray-600">Explore our professional-grade products from leading brands.</p>
         </div>
 
-        {/* Main Content with Filters and Products */}
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Filters Sidebar - Desktop */}
           <div className="lg:w-1/4 hidden lg:block">
-            <div className="bg-white rounded-lg shadow-sm p-5 sticky top-24">
-              <div className="flex justify-between items-center mb-5">
-                <h2 className="text-lg font-medium">Filters</h2>
-                <button 
-                  onClick={clearFilters}
-                  className="text-sm text-yellow-500 hover:text-yellow-700"
-                >
-                  Clear All
-                </button>
-              </div>
+            <div className="bg-white rounded-lg shadow-lg p-6 sticky top-24">
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Filters</h2>
+              <button onClick={clearFilters} className="text-sm text-blue-600 hover:text-blue-800 mb-4">Clear All</button>
               
-              {/* Main Category Filter */}
               <div className="mb-6">
-                <h3 className="font-medium mb-3 text-sm text-gray-700">Main Category</h3>
+                <h3 className="font-medium text-gray-700 mb-3">Brands</h3>
                 <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
-                  {categories.mainCategories.map((category, index) => (
+                  {categories.brands.map((brand, index) => (
                     <div key={index} className="flex items-center">
                       <input
                         type="checkbox"
-                        id={`main-${index}`}
-                        checked={filters.mainCategory.includes(category)}
-                        onChange={() => toggleCategoryFilter('mainCategory', category)}
-                        className="h-4 w-4 text-yellow-500 focus:ring-yellow-400 rounded"
+                        id={`brand-${index}`}
+                        checked={filters.brand.includes(brand)}
+                        onChange={() => toggleBrandFilter(brand)}
+                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 rounded"
                       />
-                      <label htmlFor={`main-${index}`} className="ml-2 text-sm text-gray-700">
-                        {category}
-                      </label>
+                      <label htmlFor={`brand-${index}`} className="ml-2 text-sm text-gray-700">{brand}</label>
                     </div>
                   ))}
                 </div>
               </div>
-              
-              {/* Sub Category Filter */}
+
               <div className="mb-6">
-                <h3 className="font-medium mb-3 text-sm text-gray-700">Sub Category</h3>
-                <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
-                  {categories.subCategories.map((category, index) => (
-                    <div key={index} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        id={`sub-${index}`}
-                        checked={filters.subCategory.includes(category)}
-                        onChange={() => toggleCategoryFilter('subCategory', category)}
-                        className="h-4 w-4 text-yellow-500 focus:ring-yellow-400 rounded"
-                      />
-                      <label htmlFor={`sub-${index}`} className="ml-2 text-sm text-gray-700">
-                        {category}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Price Range Filter */}
-              <div className="mb-6">
-                <h3 className="font-medium mb-3 text-sm text-gray-700">Price Range</h3>
+                <h3 className="font-medium text-gray-700 mb-3">Price Range</h3>
                 <div className="flex space-x-2 items-center">
                   <input
                     type="number"
@@ -571,105 +528,40 @@ const Products = () => {
               </div>
             </div>
           </div>
-          
-          {/* Mobile Filters Button */}
-          <div className="lg:hidden mb-4 flex justify-between items-center">
-            <button 
-              onClick={toggleFilters}
-              className="flex items-center space-x-2 px-4 py-2 bg-gray-100 rounded-lg text-gray-700 hover:bg-gray-200 transition-colors"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
-              </svg>
-              <span>Filters</span>
-              {(filters.mainCategory.length > 0 || filters.subCategory.length > 0) && (
-                <span className="bg-yellow-400 text-xs px-2 py-0.5 rounded-full text-gray-900 font-medium">
-                  {filters.mainCategory.length + filters.subCategory.length}
-                </span>
-              )}
+
+          <div className="lg:hidden mb-4">
+            <button onClick={toggleFilters} className="flex items-center px-4 py-2 bg-white border border-gray-200 rounded-lg text-gray-700 hover:bg-gray-50">
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+              Filters
             </button>
-            
-            {/* View mode toggles */}
-            <div className="flex border border-gray-200 rounded-md overflow-hidden">
-              <button 
-                onClick={() => setViewMode('grid')}
-                className={`p-2 ${viewMode === 'grid' ? 'bg-gray-100' : 'bg-white'}`}
-                aria-label="Grid view"
-              >
-                <svg className="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                </svg>
-              </button>
-              <button 
-                onClick={() => setViewMode('list')}
-                className={`p-2 ${viewMode === 'list' ? 'bg-gray-100' : 'bg-white'}`}
-                aria-label="List view"
-              >
-                <svg className="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                </svg>
-              </button>
-            </div>
           </div>
-          
-          {/* Mobile Filters Panel */}
+
           {activeFilters && (
             <div className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-end">
-              <div className="bg-white w-4/5 h-full overflow-y-auto p-5 flex flex-col">
-                <div className="flex justify-between items-center mb-5">
-                  <h2 className="text-lg font-medium">Filters</h2>
-                  <button onClick={toggleFilters} className="p-1">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
+              <div className="bg-white w-4/5 h-full overflow-y-auto p-5">
+                <div className="flex justify-between mb-4">
+                  <h2 className="text-lg font-semibold">Filters</h2>
+                  <button onClick={toggleFilters}><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
                 </div>
-                
-                {/* Main Category Filter */}
                 <div className="mb-6">
-                  <h3 className="font-medium mb-3 text-sm text-gray-700">Main Category</h3>
+                  <h3 className="font-medium text-gray-700 mb-3">Brands</h3>
                   <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
-                    {categories.mainCategories.map((category, index) => (
+                    {categories.brands.map((brand, index) => (
                       <div key={index} className="flex items-center">
                         <input
                           type="checkbox"
-                          id={`mobile-main-${index}`}
-                          checked={filters.mainCategory.includes(category)}
-                          onChange={() => toggleCategoryFilter('mainCategory', category)}
-                          className="h-4 w-4 text-yellow-500 focus:ring-yellow-400 rounded"
+                          id={`mobile-brand-${index}`}
+                          checked={filters.brand.includes(brand)}
+                          onChange={() => toggleBrandFilter(brand)}
+                          className="h-4 w-4 text-blue-600 focus:ring-blue-500 rounded"
                         />
-                        <label htmlFor={`mobile-main-${index}`} className="ml-2 text-sm text-gray-700">
-                          {category}
-                        </label>
+                        <label htmlFor={`mobile-brand-${index}`} className="ml-2 text-sm text-gray-700">{brand}</label>
                       </div>
                     ))}
                   </div>
                 </div>
-                
-                {/* Sub Category Filter */}
                 <div className="mb-6">
-                  <h3 className="font-medium mb-3 text-sm text-gray-700">Sub Category</h3>
-                  <div className="space-y-2 max-h-48 overflow-y-auto pr-2">
-                    {categories.subCategories.map((category, index) => (
-                      <div key={index} className="flex items-center">
-                        <input
-                          type="checkbox"
-                          id={`mobile-sub-${index}`}
-                          checked={filters.subCategory.includes(category)}
-                          onChange={() => toggleCategoryFilter('subCategory', category)}
-                          className="h-4 w-4 text-yellow-500 focus:ring-yellow-400 rounded"
-                        />
-                        <label htmlFor={`mobile-sub-${index}`} className="ml-2 text-sm text-gray-700">
-                          {category}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                {/* Price Range Filter */}
-                <div className="mb-6">
-                  <h3 className="font-medium mb-3 text-sm text-gray-700">Price Range</h3>
+                  <h3 className="font-medium text-gray-700 mb-3">Price Range</h3>
                   <div className="flex space-x-2 items-center">
                     <input
                       type="number"
@@ -692,314 +584,142 @@ const Products = () => {
                     />
                   </div>
                 </div>
-                
-                <div className="mt-auto space-y-3">
-                  <button 
-                    onClick={clearFilters}
-                    className="w-full py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-                  >
-                    Clear All Filters
-                  </button>
-                  <button 
-                    onClick={toggleFilters}
-                    className="w-full py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
-                  >
-                    Apply Filters
-                  </button>
-                </div>
+                <button onClick={clearFilters} className="w-full py-2 bg-gray-100 rounded">Clear All</button>
+                <button onClick={toggleFilters} className="w-full py-2 bg-blue-600 text-white rounded mt-2">Apply</button>
               </div>
             </div>
           )}
-          
-          {/* Products Content */}
-          <div className="lg:w-3/4 flex-1">
-            {/* Sorting and summary */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+
+          <div className="lg:w-3/4">
+            <div className="mb-6 flex justify-between items-center">
               <div className="text-sm text-gray-600">
                 Showing {indexOfFirstProduct + 1}-{Math.min(indexOfLastProduct, sortedProducts.length)} of {sortedProducts.length} products
               </div>
-              
-              <div className="relative">
-                <select 
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="pl-3 pr-10 py-2 text-sm border border-gray-200 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-yellow-300 appearance-none"
-                >
-                  <option value="featured">Featured</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
-                  <option value="name-asc">Name: A to Z</option>
-                  <option value="name-desc">Name: Z to A</option>
-                </select>
-                <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                  <svg className="w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </div>
-              </div>
+              <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="p-2 border border-gray-200 rounded">
+                <option value="featured">Featured</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="name-asc">Name: A to Z</option>
+                <option value="name-desc">Name: Z to A</option>
+              </select>
             </div>
-            
-            {/* Active Filters display */}
-            {(filters.mainCategory.length > 0 || filters.subCategory.length > 0 || 
-              filters.priceRange.min > priceRange.min || filters.priceRange.max < priceRange.max) && (
-              <div className="mb-6 flex flex-wrap gap-2 items-center bg-gray-50 p-3 rounded-lg">
-                <span className="text-sm font-medium text-gray-700">Active Filters:</span>
-                
-                {filters.mainCategory.map((category, index) => (
-                  <span 
-                    key={`main-${index}`} 
-                    className="px-2 py-1 bg-white rounded-md text-xs border border-gray-200 flex items-center"
-                  >
-                    Main: {category}
-                    <button 
-                      onClick={() => toggleCategoryFilter('mainCategory', category)}
-                      className="ml-1 text-gray-400 hover:text-gray-600"
-                    >
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </button>
-                  </span>
-                ))}
-                
-                {filters.subCategory.map((category, index) => (
-                  <span 
-                    key={`sub-${index}`} 
-                    className="px-2 py-1 bg-white rounded-md text-xs border border-gray-200 flex items-center"
-                  >
-                    Sub: {category}
-                    <button 
-                      onClick={() => toggleCategoryFilter('subCategory', category)}
-                      className="ml-1 text-gray-400 hover:text-gray-600"
-                    >
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </button>
-                  </span>
-                ))}
-                
-                {(filters.priceRange.min > priceRange.min || filters.priceRange.max < priceRange.max) && (
-                  <span className="px-2 py-1 bg-white rounded-md text-xs border border-gray-200 flex items-center">
-                    Price: ${filters.priceRange.min} - ${filters.priceRange.max}
-                    <button 
-                      onClick={() => updatePriceRange(priceRange.min, priceRange.max)}
-                      className="ml-1 text-gray-400 hover:text-gray-600"
-                    >
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </button>
-                  </span>
-                )}
-                
-                <button 
-                  onClick={clearFilters}
-                  className="px-2 py-1 text-xs text-yellow-600 hover:text-yellow-800 hover:underline"
-                >
-                  Clear All
-                </button>
+
+            {currentProducts.length === 0 ? (
+              <div className="bg-white rounded-lg shadow p-6 text-center">
+                <p className="text-gray-600">No products found. Try adjusting filters.</p>
+                <button onClick={clearFilters} className="mt-4 px-4 py-2 bg-blue-600 text-white rounded">Clear Filters</button>
               </div>
-            )}
-            
-            {/* No products found message */}
-            {currentProducts.length === 0 && (
-              <div className="bg-white rounded-lg shadow-sm p-10 text-center">
-                <svg className="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">No products found</h3>
-                <p className="text-gray-600 mb-4">Try adjusting your filters or search criteria</p>
-                <button 
-                  onClick={clearFilters}
-                  className="px-4 py-2 bg-yellow-400 text-gray-900 rounded-md hover:bg-yellow-500 transition-colors"
-                >
-                  Clear Filters
-                </button>
-              </div>
-            )}
-            
-            {/* Products Grid View */}
-            {viewMode === 'grid' && currentProducts.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                {currentProducts.map((product) => (
-                  <div 
-                    key={product.id} 
-                    className="group cursor-pointer"
-                  >
-                    <Link to={`/product/${product.id}`} className="block">
-                      <div className="relative rounded-xl overflow-hidden bg-white shadow-sm transition-all duration-300 hover:shadow-md">
-                        <div className="relative aspect-[4/3] overflow-hidden bg-gray-50">
-                          <img 
-                            src={getProductImage(product.id)} 
-                            alt={product.name} 
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                          
-                          {/* Display both categories */}
-                          <div className="absolute top-3 left-3 px-3 py-1 rounded text-xs font-medium" 
-                               style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}>
-                            {product.mainCategory}
-                          </div>
-                          
-                          <div className="absolute top-9 left-3 px-3 py-1 rounded text-xs font-medium bg-white/80 text-gray-700">
-                            {product.subCategory}
-                          </div>
-                          
-                          <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white py-2 px-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                            <div className="font-medium text-sm flex justify-between items-center">
-                              <span>View details</span>
-                              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                                   strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                              </svg>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="p-4">
-                          <h3 className="font-medium text-base mb-1 truncate">{product.name}</h3>
-                          <p className="text-sm text-gray-600 mb-2 line-clamp-2" title={product.description}>
-                            {product.description}
-                          </p>
-                          <div className="flex items-baseline">
-                            <span className="font-medium text-base">$ {product.price} USD</span>
-                            {product.comparePrice && (
-                              <span className="ml-2 text-gray-500 line-through text-xs">$ {product.comparePrice} USD</span>
-                            )}
-                          </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {currentProducts.map((product) => {
+                  const brand = product.brand || product.mainCategory;
+                  const redirectUrl = brandRedirects[brand] || '#';
+                  const category = getBrandCategory(product);
+
+                  return (
+                    <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-105">
+                      <div className="relative h-48 overflow-hidden">
+                        <img src={getProductImage(product.id)} alt={product.name} className="w-full h-full object-cover" />
+                        <div className="absolute top-2 left-2 bg-blue-700 text-white text-xs px-2 py-1 rounded">{brand}</div>
+                        <div className="absolute top-2 right-2 bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">{category}</div>
+                      </div>
+                      <div className="p-4">
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.name}</h3>
+                        <p className="text-sm text-gray-600 mb-3 line-clamp-2">{product.description}</p>
+                        <div className="flex justify-between items-center">
+                          {/* <span className="text-lg font-medium text-gray-900">${product.price} USD</span> */}
+                          <a href={redirectUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">View Brochure</a>
                         </div>
                       </div>
-                    </Link>
-                  </div>
-                ))}
+                    </div>
+                  );
+                })}
               </div>
             )}
-            
-            {/* Products List View */}
-            {viewMode === 'list' && currentProducts.length > 0 && (
-              <div className="space-y-4 mb-12">
-                {currentProducts.map((product) => (
-                  <div 
-                    key={product.id} 
-                    className="group cursor-pointer bg-white rounded-xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md flex"
-                  >
-                    <Link to={`/product/${product.id}`} className="flex w-full">
-                      <div className="w-1/3 lg:w-1/4 relative">
-                        <div className="aspect-[4/3] relative overflow-hidden bg-gray-50 h-full">
-                          <img 
-                            src={getProductImage(product.id)} 
-                            alt={product.name} 
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                          
-                          {/* Display both main and sub categories */}
-                          <div className="absolute top-3 left-3 px-3 py-1 rounded text-xs font-medium" 
-                               style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}>
-                            {product.mainCategory}
-                          </div>
-                          
-                          <div className="absolute top-9 left-3 px-3 py-1 rounded text-xs font-medium bg-white/80 text-gray-700">
-                            {product.subCategory}
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="w-2/3 lg:w-3/4 p-4 flex flex-col justify-between">
-                        <div>
-                          <h3 className="font-medium text-lg mb-1">{product.name}</h3>
-                          <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-                            {product.description}
-                          </p>
-                        </div>
-                        
-                        <div className="flex flex-wrap justify-between items-end">
-                          <div className="flex items-baseline">
-                            <span className="font-medium text-lg">$ {product.price} USD</span>
-                            {product.comparePrice && (
-                              <span className="ml-2 text-gray-500 line-through text-sm">$ {product.comparePrice} USD</span>
-                            )}
-                          </div>
-                          
-                          <div className="flex gap-2 mt-2 sm:mt-0">
-                            <button 
-                              className="px-3 py-1 rounded-md text-sm font-medium bg-gray-900 text-white transition-colors hover:bg-yellow-400 hover:text-gray-900"
-                            >
-                              View Details
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            )}
-            
-            {/* Pagination */}
+
             {sortedProducts.length > productsPerPage && (
-              <div className="flex justify-center mt-10">
-                <div className="flex flex-wrap space-x-2">
-                  <button 
-                    onClick={prevPage} 
-                    disabled={currentPage === 1}
-                    className={`px-4 py-2 rounded-md ${
-                      currentPage === 1 
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    Previous
-                  </button>
-                  
-                  {[...Array(totalPages)].map((_, index) => {
-                    // Show limited number of page buttons
-                    if (
-                      index === 0 || 
-                      index === totalPages - 1 || 
-                      (index >= currentPage - 2 && index <= currentPage + 1)
-                    ) {
-                      return (
-                        <button
-                          key={index}
-                          onClick={() => paginate(index + 1)}
-                          className={`px-4 py-2 rounded-md ${
-                            currentPage === index + 1 
-                              ? 'bg-yellow-400 text-white' 
-                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                          }`}
-                        >
-                          {index + 1}
-                        </button>
-                      );
-                    }
-                    
-                    // Show ellipsis for skipped pages
-                    if (index === 1 && currentPage > 3) {
-                      return <span key="start-ellipsis" className="px-3 py-2">...</span>;
-                    }
-                    
-                    if (index === totalPages - 2 && currentPage < totalPages - 2) {
-                      return <span key="end-ellipsis" className="px-3 py-2">...</span>;
-                    }
-                    
-                    return null;
-                  })}
-                  
-                  <button 
-                    onClick={nextPage} 
-                    disabled={currentPage === totalPages}
-                    className={`px-4 py-2 rounded-md ${
-                      currentPage === totalPages 
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                  >
-                    Next
-                  </button>
-                </div>
+              <div className="flex justify-center mt-8">
+                <button onClick={prevPage} disabled={currentPage === 1} className="px-4 py-2 bg-gray-200 rounded-l disabled:opacity-50">Previous</button>
+                {[...Array(totalPages)].map((_, i) => (
+                  <button key={i} onClick={() => paginate(i + 1)} className={`px-4 py-2 ${currentPage === i + 1 ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}>{i + 1}</button>
+                ))}
+                <button onClick={nextPage} disabled={currentPage === totalPages} className="px-4 py-2 bg-gray-200 rounded-r disabled:opacity-50">Next</button>
               </div>
             )}
+
+            {/* Find the Right Product Section */}
+            <div className="mt-12 bg-white rounded-lg shadow-lg p-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Find the Right Product</h2>
+              <p className="text-gray-600 mb-6">Let us help you select the perfect solution for your needs. Fill out the form below.</p>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone Number</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="company" className="block text-sm font-medium text-gray-700">Company Name</label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    required
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="requirements" className="block text-sm font-medium text-gray-700">Requirements</label>
+                  <textarea
+                    id="requirements"
+                    name="requirements"
+                    value={formData.requirements}
+                    onChange={handleInputChange}
+                    required
+                    rows="3"
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
