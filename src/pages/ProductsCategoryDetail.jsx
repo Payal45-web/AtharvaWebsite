@@ -318,6 +318,15 @@ const themeColors = {
   dark: '#111827' // Gray-900
 };
 
+// Brand-specific redirect URLs
+const brandRedirects = {
+  'Nilfisk': 'https://www.nilfisk.com/',
+  'Ingersoll Rand': 'https://www.ingersollrand.com/en-in',
+  'AROzone.com': 'https://www.arozone.com/',
+  'Tristar Bolting': 'https://www.tristarbolting.com/',
+  'SP Air Tools': 'https://www.spairtools.com/'
+};
+
 const ProductCategoryDetail = () => {
   const { categoryType, categorySlug } = useParams();
   const navigate = useNavigate();
@@ -592,96 +601,124 @@ const ProductCategoryDetail = () => {
         
         {viewMode === 'grid' ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
-            {currentProducts.map((product) => (
-              <div 
-                key={product.id} 
-                className="group cursor-pointer" 
-                onClick={() => handleProductClick(product.id)}
-              >
-                <div className="relative rounded-xl overflow-hidden bg-white shadow-sm transition-all duration-300 hover:shadow-md">
-                  <div className="relative aspect-[4/3] overflow-hidden bg-gray-50">
-                    <img 
-                      src={getProductImage(product.id)} 
-                      alt={product.name} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    
-                    <div className="absolute top-3 left-3 px-3 py-1 rounded text-xs font-medium" 
-                         style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}>
-                      {product.mainCategory}
+            {currentProducts.map((product) => {
+              const brand = product.brand || (product.mainCategory === "Industrial Cleaning Solutions" && product.name.startsWith("VP") ? "Nilfisk" : null) || product.mainCategory;
+              const redirectUrl = brandRedirects[brand] || 'https://www.example.com';
+              console.log('Product:', product.name, 'Brand:', brand, 'Redirect URL:', redirectUrl); // Debug log
+
+              return (
+                <div 
+                  key={product.id} 
+                  className="group cursor-pointer" 
+                  onClick={() => handleProductClick(product.id)}
+                >
+                  <div className="relative rounded-xl overflow-hidden bg-white shadow-sm transition-all duration-300 hover:shadow-md">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-gray-50">
+                      <img 
+                        src={getProductImage(product.id)} 
+                        alt={product.name} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      
+                      <div className="absolute top-3 left-3 px-3 py-1 rounded text-xs font-medium" 
+                           style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}>
+                        {product.mainCategory}
+                      </div>
+                      
+                      <div className="absolute top-9 left-3 px-3 py-1 rounded text-xs font-medium bg-white/80 text-gray-700">
+                        {product.subCategory}
+                      </div>
+                      
+                      <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white py-2 px-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                        <div className="font-medium text-sm flex justify-between items-center">
+                          <span>View Specifications</span>
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                               strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                          </svg>
+                        </div>
+                      </div>
                     </div>
                     
-                    <div className="absolute top-9 left-3 px-3 py-1 rounded text-xs font-medium bg-white/80 text-gray-700">
-                      {product.subCategory}
+                    <div className="p-4">
+                      <h3 className="font-medium text-base mb-1 truncate">{product.name}</h3>
+                      <p className="text-sm text-gray-600 mb-2 line-clamp-2" title={product.description}>
+                        {product.description}
+                      </p>
+                      <a
+                        href={redirectUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-yellow-600 hover:underline"
+                      >
+                        View Brochure
+                      </a>
                     </div>
-                    
-                    <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-80 text-white py-2 px-3 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                      <div className="font-medium text-sm flex justify-between items-center">
-                        <span>View Specifications</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                             strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="space-y-4 mb-12">
+            {currentProducts.map((product) => {
+              const brand = product.brand || (product.mainCategory === "Industrial Cleaning Solutions" && product.name.startsWith("VP") ? "Nilfisk" : null) || product.mainCategory;
+              const redirectUrl = brandRedirects[brand] || 'https://www.example.com';
+              console.log('Product:', product.name, 'Brand:', brand, 'Redirect URL:', redirectUrl); // Debug log
+
+              return (
+                <div 
+                  key={product.id} 
+                  className="group cursor-pointer bg-white rounded-xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md flex"
+                  onClick={() => handleProductClick(product.id)}
+                >
+                  <div className="w-1/3 lg:w-1/4 relative">
+                    <div className="aspect-[4/3] relative overflow-hidden bg-gray-50 h-full">
+                      <img 
+                        src={getProductImage(product.id)} 
+                        alt={product.name} 
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      
+                      <div className="absolute top-3 left-3 px-3 py-1 rounded text-xs font-medium" 
+                           style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}>
+                        {product.mainCategory}
+                      </div>
+                      
+                      <div className="absolute top-9 left-3 px-3 py-1 rounded text-xs font-medium bg-white/80 text-gray-700">
+                        {product.subCategory}
                       </div>
                     </div>
                   </div>
                   
-                  <div className="p-4">
-                    <h3 className="font-medium text-base mb-1 truncate">{product.name}</h3>
-                    <p className="text-sm text-gray-600 mb-2 line-clamp-2" title={product.description}>
-                      {product.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="space-y-4 mb-12">
-            {currentProducts.map((product) => (
-              <div 
-                key={product.id} 
-                className="group cursor-pointer bg-white rounded-xl overflow-hidden shadow-sm transition-all duration-300 hover:shadow-md flex"
-                onClick={() => handleProductClick(product.id)}
-              >
-                <div className="w-1/3 lg:w-1/4 relative">
-                  <div className="aspect-[4/3] relative overflow-hidden bg-gray-50 h-full">
-                    <img 
-                      src={getProductImage(product.id)} 
-                      alt={product.name} 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    
-                    <div className="absolute top-3 left-3 px-3 py-1 rounded text-xs font-medium" 
-                         style={{ backgroundColor: themeColors.primary, color: themeColors.dark }}>
-                      {product.mainCategory}
+                  <div className="w-2/3 lg:w-3/4 p-4 flex flex-col justify-between">
+                    <div>
+                      <h3 className="font-medium text-lg mb-1">{product.name}</h3>
+                      <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                        {product.description}
+                      </p>
                     </div>
                     
-                    <div className="absolute top-9 left-3 px-3 py-1 rounded text-xs font-medium bg-white/80 text-gray-700">
-                      {product.subCategory}
+                    <div className="flex gap-2 mt-2 sm:mt-0">
+                      <button 
+                        className="px-3 py-1 rounded-md text-sm font-medium bg-gray-900 text-white transition-colors hover:bg-yellow-400 hover:text-gray-900"
+                        onClick={(e) => { e.stopPropagation(); handleProductClick(product.id); }}
+                      >
+                        View Specifications
+                      </button>
+                      <a
+                        href={redirectUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-1 rounded-md text-sm font-medium bg-yellow-400 text-gray-900 transition-colors hover:bg-yellow-500"
+                      >
+                        View Brochure
+                      </a>
                     </div>
                   </div>
                 </div>
-                
-                <div className="w-2/3 lg:w-3/4 p-4 flex flex-col justify-between">
-                  <div>
-                    <h3 className="font-medium text-lg mb-1">{product.name}</h3>
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-                      {product.description}
-                    </p>
-                  </div>
-                  
-                  <div className="flex gap-2 mt-2 sm:mt-0">
-                    <button 
-                      className="px-3 py-1 rounded-md text-sm font-medium bg-gray-900 text-white transition-colors hover:bg-yellow-400 hover:text-gray-900"
-                      onClick={(e) => { e.stopPropagation(); handleProductClick(product.id); }}
-                    >
-                      View Specifications
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
         

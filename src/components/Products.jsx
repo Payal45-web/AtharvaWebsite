@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import productsData from '../components/Products.json';
 
@@ -320,11 +320,11 @@ const themeColors = {
 
 // Brand-specific redirect URLs
 const brandRedirects = {
-  Nilfisk: 'https://www.nilfisk.com/global',
-  'Ingersoll Rand': 'https://powertools.ingersollrand.com',
-  'AROzone.com': 'https://www.arozone.com',
-  'Tristar Bolting': 'https://tristarbolting.com', // Assumed URL
-  'SP Air Tools': 'https://www.spairtools.com' // Assumed URL
+  'Nilfisk': 'https://www.nilfisk.com/',
+  'Ingersoll Rand': 'https://www.ingersollrand.com/en-in',
+  'AROzone.com': 'https://www.arozone.com/',
+  'Tristar Bolting': 'https://www.tristarbolting.com/',
+  'SP Air Tools': 'https://www.spairtools.com/'
 };
 
 // Get brand-specific category based on product name or brand
@@ -361,7 +361,8 @@ const Products = () => {
     email: '',
     phone: '',
     company: '',
-    requirements: ''
+    country: '',
+    message: ''
   });
   const productsPerPage = 6;
 
@@ -389,11 +390,11 @@ const Products = () => {
       case 'price-low':
         return sorted.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
       case 'price-high':
-        return sorted.sort((a, b) => parseFloat(b.price) - parseFloat(b.price));
+        return sorted.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
       case 'name-asc':
         return sorted.sort((a, b) => a.name.localeCompare(b.name));
       case 'name-desc':
-        return sorted.sort((a, b) => b.name.localeCompare(a.name));
+        return sorted.sort((a, b) => b.name.localeCompare(b.name));
       case 'featured':
       default:
         return sorted;
@@ -446,16 +447,9 @@ const Products = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulate sending to admin email (replace with actual backend API call)
     console.log('Form submitted:', formData);
-    alert('Thank you! Your request has been sent to our team.');
-    // Reset form
-    setFormData({ name: '', email: '', phone: '', company: '', requirements: '' });
-    // For real implementation, use fetch or axios to POST to a backend endpoint
-    // Example: fetch('/api/submit-form', { method: 'POST', body: JSON.stringify(formData), headers: { 'Content-Type': 'application/json' } })
-    // .then(response => response.json())
-    // .then(data => alert('Submission successful'))
-    // .catch(error => alert('Error submitting form'));
+    alert('Thank you! Your enquiry has been sent to our team.');
+    setFormData({ name: '', email: '', phone: '', company: '', country: '', message: '' });
   };
 
   return (
@@ -613,7 +607,7 @@ const Products = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {currentProducts.map((product) => {
                   const brand = product.brand || product.mainCategory;
-                  const redirectUrl = brandRedirects[brand] || '#';
+                  const redirectUrl = brandRedirects[brand] || brandRedirects[getBrandCategory(product).split(' & ')[0]] || 'https://www.example.com';
                   const category = getBrandCategory(product);
 
                   return (
@@ -627,7 +621,6 @@ const Products = () => {
                         <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.name}</h3>
                         <p className="text-sm text-gray-600 mb-3 line-clamp-2">{product.description}</p>
                         <div className="flex justify-between items-center">
-                          {/* <span className="text-lg font-medium text-gray-900">${product.price} USD</span> */}
                           <a href={redirectUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">View Brochure</a>
                         </div>
                       </div>
@@ -647,76 +640,106 @@ const Products = () => {
               </div>
             )}
 
-            {/* Find the Right Product Section */}
             <div className="mt-12 bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Find the Right Product</h2>
-              <p className="text-gray-600 mb-6">Let us help you select the perfect solution for your needs. Fill out the form below.</p>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">Enquiry Form</h2>
+              <p className="text-gray-600 mb-6">Get in touch with our sales team and partners for more details.</p>
+              <div className="success-message" id="successMessage" style={{ display: 'none' }}>
+                ✅ Thank you for your enquiry! We'll get back to you within 24 hours.
+              </div>
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="form-group">
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 required">Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      required
+                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 required">Email</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="form-group">
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 required">Phone</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      required
+                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="company" className="block text-sm font-medium text-gray-700">Company</label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="country" className="block text-sm font-medium text-gray-700 required">Country</label>
+                  <select
+                    id="country"
+                    name="country"
+                    value={formData.country}
                     onChange={handleInputChange}
                     required
                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                  />
+                  >
+                    <option value="">Select Country</option>
+                    <option value="US">United States</option>
+                    <option value="CA">Canada</option>
+                    <option value="GB">United Kingdom</option>
+                    <option value="AU">Australia</option>
+                    <option value="DE">Germany</option>
+                    <option value="FR">France</option>
+                    <option value="IN">India</option>
+                    <option value="JP">Japan</option>
+                    <option value="CN">China</option>
+                    <option value="BR">Brazil</option>
+                    <option value="OTHER">Other</option>
+                  </select>
                 </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone Number</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="company" className="block text-sm font-medium text-gray-700">Company Name</label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleInputChange}
-                    required
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="requirements" className="block text-sm font-medium text-gray-700">Requirements</label>
+                <div className="form-group">
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 required">Message</label>
                   <textarea
-                    id="requirements"
-                    name="requirements"
-                    value={formData.requirements}
+                    id="message"
+                    name="message"
+                    value={formData.message}
                     onChange={handleInputChange}
                     required
                     rows="3"
                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Tell us about your requirements, questions, or how we can help you..."
                   ></textarea>
                 </div>
                 <button
                   type="submit"
                   className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
-                  Submit
+                  Send Enquiry
                 </button>
               </form>
             </div>
