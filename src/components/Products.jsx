@@ -305,7 +305,6 @@ const imageMap = {
   261: img261, 262: img262, 263: img263, 264: img264, 265: img265, 266: img266, 267: img267, 268: img268, 269: img269, 270: img270
 };
 
-// Get product image from imported assets
 const getProductImage = (productId) => {
   return imageMap[productId] || img1; // Fallback to first image if ID not found
 };
@@ -318,7 +317,7 @@ const themeColors = {
   dark: '#111827' // Gray-900
 };
 
-// Brand-specific redirect URLs
+// Brand-specific redirect URLs (fallback if brochureUrl is not available)
 const brandRedirects = {
   'Nilfisk': 'https://www.nilfisk.com/',
   'Ingersoll Rand': 'https://www.ingersollrand.com/en-in',
@@ -394,7 +393,7 @@ const Products = () => {
       case 'name-asc':
         return sorted.sort((a, b) => a.name.localeCompare(b.name));
       case 'name-desc':
-        return sorted.sort((a, b) => b.name.localeCompare(b.name));
+        return sorted.sort((a, b) => b.name.localeCompare(a.name));
       case 'featured':
       default:
         return sorted;
@@ -607,7 +606,8 @@ const Products = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {currentProducts.map((product) => {
                   const brand = product.brand || product.mainCategory;
-                  const redirectUrl = brandRedirects[brand] || brandRedirects[getBrandCategory(product).split(' & ')[0]] || 'https://www.example.com';
+                  const fallbackUrl = brandRedirects[brand] || brandRedirects[getBrandCategory(product).split(' & ')[0]] || 'https://www.example.com';
+                  const brochureUrl = product.brochureUrl || fallbackUrl;
                   const category = getBrandCategory(product);
 
                   return (
@@ -621,7 +621,14 @@ const Products = () => {
                         <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.name}</h3>
                         <p className="text-sm text-gray-600 mb-3 line-clamp-2">{product.description}</p>
                         <div className="flex justify-between items-center">
-                          <a href={redirectUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:underline">View Brochure</a>
+                          <a 
+                            href={brochureUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="text-sm text-blue-600 hover:underline hover:text-blue-800 transition-colors"
+                          >
+                            View Brochure
+                          </a>
                         </div>
                       </div>
                     </div>
